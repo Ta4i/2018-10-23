@@ -17,6 +17,12 @@ export default class UserForm extends Component {
   }
 
   handleUserNameInput = (event) => {
+    if (event.target.value.length > 10) {
+      return this.setState({
+        username: ''
+      })
+    }
+
     this.setState({
       username: event.target.value
     })
