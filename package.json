@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-scripts": "2.0.5"
+    "react-scripts": "2.0.5",
+    "react-select": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,7 +20,6 @@
     "lint-staged": "^7.1.0",
     "prettier": "^1.14.3"
   },
-
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
