@@ -1,0 +1,43 @@
+{
+  "name": "react-2018-10-23",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-scripts": "2.0.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "prettier": "prettier --write \"**/*.js\"",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "husky": "^1.0.0-rc.6",
+    "lint-staged": "^7.1.0",
+    "prettier": "^1.14.3"
+  },
+
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run prettier",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
