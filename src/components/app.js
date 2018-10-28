@@ -6,7 +6,7 @@ import Select from 'react-select'
 
 export default class App extends Component {
   state = {
-    selectedOption: null
+    selectedOptions: null
   }
   render() {
     return (
@@ -16,6 +16,7 @@ export default class App extends Component {
           options={this.optionsForSelect}
           onChange={this.handleSelectChange}
           value={this.state.selectedOption}
+          isMulti={true}
         />
         <ArticleList items={articles} />
       </div>
@@ -29,7 +30,7 @@ export default class App extends Component {
     }))
   }
 
-  handleSelectChange = (selectedOption) => {
-    this.setState({ selectedOption })
+  handleSelectChange = (selectedOptions) => {
+    this.setState({ selectedOptions })
   }
 }
