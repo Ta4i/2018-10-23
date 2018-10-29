@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react'
+import CommentList from './comment-list'
 
 export default class Article extends PureComponent {
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
 
-    console.log('render')
+    console.log('render Article')
 
     return (
       <div>
@@ -25,6 +26,11 @@ export default class Article extends PureComponent {
 
     if (!isOpen) return null
 
-    return <section>{article.text}</section>
+    return (
+      <section>
+        {article.text}
+        <CommentList comments={this.props.article.comments} />
+      </section>
+    )
   }
 }
