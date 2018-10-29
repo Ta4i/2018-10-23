@@ -12,9 +12,13 @@ export default class App extends Component {
     from: undefined,
     to: undefined
   }
+
   render() {
     const { from, to } = this.state
     const modifiers = { start: from, end: to }
+    const dateRange = `${from ? from.toLocaleDateString('en-GB') : ''} ${
+      from && to ? '-' : ''
+    } ${to ? to.toLocaleDateString('en-GB') : ''}`
 
     return (
       <div>
@@ -23,7 +27,9 @@ export default class App extends Component {
           options={this.optionsForSelect}
           onChange={this.handleSelectChange}
           value={this.state.selectedOption}
+          isMulti
         />
+        <input value={dateRange} />
         <DayPicker
           className="Selectable"
           modifiers={modifiers}
