@@ -17,6 +17,7 @@ export default class App extends Component {
           options={this.optionsForSelect}
           onChange={this.handleSelectChange}
           value={this.state.selectedOption}
+          isMulti={true}
         />
         <MyCalendar />
         <ArticleList items={articles} />
