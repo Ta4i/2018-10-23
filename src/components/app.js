@@ -32,6 +32,7 @@ export default class App extends Component {
       <div>
         <UserForm />
         <Select
+          isMulti
           options={this.optionsForSelect}
           onChange={this.handleSelectChange}
           value={this.state.selectedOption}
