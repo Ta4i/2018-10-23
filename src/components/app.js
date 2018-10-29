@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ArticleList from './article-list'
 import articles from '../fixtures'
 import UserForm from './user-form'
+import DatePikcer from './date-piker'
 import Select from 'react-select'
 
 export default class App extends Component {
@@ -18,6 +19,7 @@ export default class App extends Component {
           value={this.state.selectedOption}
           isMulti={true}
         />
+        <DatePikcer />
         <ArticleList items={articles} />
       </div>
     )
