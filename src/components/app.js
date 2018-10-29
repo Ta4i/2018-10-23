@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ArticleList from './article-list'
 import articles from '../fixtures'
 import UserForm from './user-form'
+import DayRange from './day-range'
 import Select from 'react-select'
 
 export default class App extends Component {
@@ -16,7 +17,9 @@ export default class App extends Component {
           options={this.optionsForSelect}
           onChange={this.handleSelectChange}
           value={this.state.selectedOption}
+          isMulti={true}
         />
+        <DayRange />
         <ArticleList items={articles} />
       </div>
     )
