@@ -62,6 +62,8 @@ export default class Article extends PureComponent {
           <p className="comment__text">{item.text}</p>
         </div>
       ))
+    } else {
+      return <h5>Here are no comments yet</h5>
     }
   }
 }
