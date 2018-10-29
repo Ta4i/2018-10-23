@@ -1,11 +1,22 @@
 import React, { PureComponent } from 'react'
+import CommentList from './CommentsList'
+// styles
+import '../styles/app.css'
 
 export default class Article extends PureComponent {
-  render() {
-    const { article, isOpen } = this.props
-    const buttonTitle = isOpen ? 'close' : 'open'
+  state = {
+    isOpen: this.props.isOpen
+  }
 
-    console.log('render')
+  handleClick = () => {
+    this.setState({ isOpen: !this.state.isOpen })
+    this.props.toggleOpen(this.props.article.id)
+  }
+
+  render() {
+    const { article } = this.props
+    const { isOpen } = this.state
+    const buttonTitle = isOpen ? 'close' : 'open'
 
     return (
       <div>
@@ -16,15 +27,17 @@ export default class Article extends PureComponent {
     )
   }
 
-  handleClick = () => {
-    this.props.toggleOpen(this.props.article.id)
-  }
-
   get body() {
-    const { isOpen, article } = this.props
+    const { article } = this.props
+    const { isOpen } = this.state
 
     if (!isOpen) return null
 
-    return <section>{article.text}</section>
+    return (
+      <section>
+        {article.text}
+        <CommentList comments={article.comments} />
+      </section>
+    )
   }
 }
