@@ -1,17 +1,17 @@
 import React, { PureComponent } from 'react'
+import CommentList from './comment-list'
 
 export default class Article extends PureComponent {
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
 
-    console.log('render')
-
     return (
       <div>
         <h3>{article.title}</h3>
         <button onClick={this.handleClick}>{buttonTitle}</button>
         {this.body}
+        <CommentList items={article.comments} isArticleOpen={isOpen} />
       </div>
     )
   }
