@@ -21,13 +21,17 @@ class CommentList extends Component {
   }
 
   get comments() {
-    const { isOpen } = this.props
+    const { isOpen, comments } = this.props
 
     if (!isOpen) {
       return null
     }
 
-    return this.props.comments.map((it) => {
+    if (!comments || !comments.length) {
+      return <p>There is no one comment yet</p>
+    }
+
+    return comments.map((it) => {
       return (
         <li key={it.id}>
           <Comment comment={it} />
