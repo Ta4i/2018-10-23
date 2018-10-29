@@ -1,5 +1,3 @@
-// HOC === Higher Order Component
-
 import React, { Component } from 'react'
 
 export default (OriginalComponent) =>
@@ -7,7 +5,11 @@ export default (OriginalComponent) =>
     state = {
       openItemId: null
     }
-    toggleOpenItem = (openItemId) => this.setState({ openItemId })
+
+    toggleOpenItem = (openItemId) => {
+      if (this.state.openItemId === openItemId) openItemId = null
+      this.setState({ openItemId })
+    }
 
     render() {
       return (
