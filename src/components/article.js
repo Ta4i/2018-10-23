@@ -21,7 +21,7 @@ export default class Article extends PureComponent {
   }
 
   get body() {
-    const { isOpen, article } = this.props
+    const { article, isOpen } = this.props
 
     if (!isOpen) return null
 
