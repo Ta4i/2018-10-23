@@ -1,21 +1,17 @@
 import React, { PureComponent } from 'react'
-
+import CommentList from './CommentsList'
 // styles
 import '../styles/app.css'
 
 export default class Article extends PureComponent {
   state = {
-    isOpen: this.props.isOpen,
-    isOpenComments: false
+    isOpen: this.props.isOpen
   }
 
   handleClick = () => {
     this.setState({ isOpen: !this.state.isOpen })
     this.props.toggleOpen(this.props.article.id)
   }
-
-  handleClickCommentBtn = () =>
-    this.setState({ isOpenComments: !this.state.isOpenComments })
 
   render() {
     const { article } = this.props
@@ -33,37 +29,15 @@ export default class Article extends PureComponent {
 
   get body() {
     const { article } = this.props
-    const { isOpen, isOpenComments } = this.state
-    const commentBtn = isOpenComments ? 'Hide comments' : 'Show comments'
+    const { isOpen } = this.state
 
     if (!isOpen) return null
 
     return (
       <section>
         {article.text}
-        <button className="comment__btn" onClick={this.handleClickCommentBtn}>
-          {commentBtn}
-        </button>
-        {isOpenComments ? this.comments : null}
+        <CommentList comments={article.comments} />
       </section>
     )
-  }
-
-  get comments() {
-    const { article } = this.props
-    const commentsArr = article.comments
-
-    if (commentsArr) {
-      return commentsArr.map((item) => (
-        <div className="comment" key={item.id}>
-          <span className="comment__author">
-            <b>{item.user}</b> says:
-          </span>
-          <p className="comment__text">{item.text}</p>
-        </div>
-      ))
-    } else {
-      return <h5>Here are no comments yet</h5>
-    }
   }
 }
