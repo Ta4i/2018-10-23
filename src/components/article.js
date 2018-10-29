@@ -23,7 +23,7 @@ export default class Article extends PureComponent {
   get body() {
     const { isOpen, article } = this.props
 
-    if (!isOpen) return null
+    if (!isOpen) return <section />
 
     return <section>{article.text}</section>
   }
