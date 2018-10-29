@@ -14,3 +14,16 @@
     border-top-right-radius: 50% !important;
     border-bottom-right-radius: 50% !important;
 }
+
+/* Comments */
+.comment {
+    padding: 7px;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.comment__btn {
+    display: block;
+    margin-top: 10px;
+}

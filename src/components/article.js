@@ -1,11 +1,26 @@
 import React, { PureComponent } from 'react'
 
-export default class Article extends PureComponent {
-  render() {
-    const { article, isOpen } = this.props
-    const buttonTitle = isOpen ? 'close' : 'open'
+// styles
+import '../styles/app.css'
 
-    console.log('render')
+export default class Article extends PureComponent {
+  state = {
+    isOpen: this.props.isOpen,
+    isOpenComments: false
+  }
+
+  handleClick = () => {
+    this.setState({ isOpen: !this.state.isOpen })
+    this.props.toggleOpen(this.props.article.id)
+  }
+
+  handleClickCommentBtn = () =>
+    this.setState({ isOpenComments: !this.state.isOpenComments })
+
+  render() {
+    const { article } = this.props
+    const { isOpen } = this.state
+    const buttonTitle = isOpen ? 'close' : 'open'
 
     return (
       <div>
@@ -16,15 +31,37 @@ export default class Article extends PureComponent {
     )
   }
 
-  handleClick = () => {
-    this.props.toggleOpen(this.props.article.id)
-  }
-
   get body() {
-    const { isOpen, article } = this.props
+    const { article } = this.props
+    const { isOpen, isOpenComments } = this.state
+    const commentBtn = isOpenComments ? 'Hide comments' : 'Show comments'
 
     if (!isOpen) return null
 
-    return <section>{article.text}</section>
+    return (
+      <section>
+        {article.text}
+        <button className="comment__btn" onClick={this.handleClickCommentBtn}>
+          {commentBtn}
+        </button>
+        {isOpenComments ? this.comments : null}
+      </section>
+    )
+  }
+
+  get comments() {
+    const { article } = this.props
+    const commentsArr = article.comments
+
+    if (commentsArr) {
+      return commentsArr.map((item) => (
+        <div className="comment" key={item.id}>
+          <span className="comment__author">
+            <b>{item.user}</b> says:
+          </span>
+          <p className="comment__text">{item.text}</p>
+        </div>
+      ))
+    }
   }
 }
