@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Comment from './comment'
 
 class CommentList extends Component {
   render() {
@@ -7,14 +6,20 @@ class CommentList extends Component {
 
     console.log('CommentList renders, comments', comments)
 
-    return <ul>{this.comments}</ul>
+    return (
+      <div>
+        <button>{'Hide comments'}</button>
+        <ul>{this.comments}</ul>
+      </div>
+    )
   }
 
   get comments() {
     if (!this.props.comments) return
     return this.props.comments.map((comment) => (
       <li key={comment.id}>
-        <Comment user={comment.user} text={comment.text} />
+        <h4>{comment.user}</h4>
+        <p>{comment.text}</p>
       </li>
     ))
   }
