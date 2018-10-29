@@ -5,9 +5,14 @@ import React, { Component } from 'react'
 export default (OriginalComponent) =>
   class DecoratedComponent extends Component {
     state = {
-      openItemId: null
+      openItemId: null,
+      doOpen: false
     }
-    toggleOpenItem = (openItemId) => this.setState({ openItemId })
+    toggleOpenItem = (openItemId, buttonText) =>
+      this.setState({
+        openItemId: openItemId,
+        doOpen: buttonText === 'open'
+      })
 
     render() {
       return (
@@ -15,6 +20,7 @@ export default (OriginalComponent) =>
           {...this.props}
           toggleOpenItem={this.toggleOpenItem}
           openItemId={this.state.openItemId}
+          doOpen={this.state.doOpen}
         />
       )
     }
