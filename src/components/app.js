@@ -3,11 +3,13 @@ import ArticleList from './article-list'
 import articles from '../fixtures'
 import UserForm from './user-form'
 import Select from 'react-select'
+import DayPicker from './dayPicker'
 
 export default class App extends Component {
   state = {
     selectedOption: null
   }
+
   render() {
     return (
       <div>
@@ -16,7 +18,9 @@ export default class App extends Component {
           options={this.optionsForSelect}
           onChange={this.handleSelectChange}
           value={this.state.selectedOption}
+          isMulti={true}
         />
+        <DayPicker />
         <ArticleList items={articles} />
       </div>
     )
