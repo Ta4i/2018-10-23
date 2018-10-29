@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import CommentList from './comment-list'
 
 export default class Article extends PureComponent {
   render() {
@@ -17,14 +18,24 @@ export default class Article extends PureComponent {
   }
 
   handleClick = () => {
-    this.props.toggleOpen(this.props.article.id)
+    const { isOpen } = this.props
+    if (!isOpen) {
+      this.props.toggleOpen(this.props.article.id)
+      return
+    }
+    this.props.toggleOpen(null)
   }
 
   get body() {
     const { isOpen, article } = this.props
 
-    if (!isOpen) return null
+    if (!isOpen) return <section />
 
-    return <section>{article.text}</section>
+    return (
+      <div>
+        <section>{article.text}</section>
+        <CommentList comments={article.comments} />
+      </div>
+    )
   }
 }
