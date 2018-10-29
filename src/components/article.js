@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 import CommentList from './comment-list'
+import decorator from '../decorators/accordion'
 
-export default class Article extends PureComponent {
+class Article extends PureComponent {
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
@@ -22,15 +23,24 @@ export default class Article extends PureComponent {
   }
 
   get body() {
-    const { isOpen, article } = this.props
+    const { isOpen, article, toggleOpenItem, openItemId } = this.props
 
-    if (!isOpen) return null
+    if (!isOpen) {
+      return null
+    }
 
     return (
       <span>
         <section>{article.text}</section>
-        <CommentList comments={article.comments} />
+        <CommentList
+          comments={article.comments}
+          toggleOpen={toggleOpenItem}
+          isOpen={openItemId === article.id}
+          openItemId={article.id}
+        />
       </span>
     )
   }
 }
+
+export default decorator(Article)
