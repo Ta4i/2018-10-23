@@ -10,7 +10,7 @@ export default class App extends Component {
       <div>
         <UserForm />
         <Filters articles={articles} />
-        <ArticleList items={articles} />
+        <ArticleList articles={articles} />
       </div>
     )
   }

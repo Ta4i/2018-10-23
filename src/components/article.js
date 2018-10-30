@@ -18,7 +18,9 @@ export default class Article extends PureComponent {
     return (
       <div>
         <h3>{article.title}</h3>
-        <button onClick={this.handleClick}>{buttonTitle}</button>
+        <button onClick={this.handleClick} className={'test--article__btn'}>
+          {buttonTitle}
+        </button>
         {this.body}
       </div>
     )
@@ -34,7 +36,7 @@ export default class Article extends PureComponent {
     if (!isOpen) return null
 
     return (
-      <section>
+      <section className={'test--article__body'}>
         {article.text}
         {this.state.error ? null : <CommentList comments={article.comments} />}
       </section>

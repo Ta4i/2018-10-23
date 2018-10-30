@@ -17,10 +17,12 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "prop-types": "^15.6.2",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "husky": "^1.0.0-rc.6",
     "lint-staged": "^7.1.0",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "prop-types": "^15.6.2"
   },
   "husky": {
     "hooks": {
