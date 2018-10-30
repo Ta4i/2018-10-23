@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 
 const closer = (OriginalComponent) =>
   class DecoratedComponent extends Component {
-    constructor(props) {
-      super(props)
-
-      this.state = {
-        isOpen: true
-      }
+    state = {
+      isOpen: true
     }
 
     toggleClose = () => {

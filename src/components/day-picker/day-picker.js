@@ -17,7 +17,7 @@ export default class DayChooser extends Component {
     }
   }
 
-  getInitialState() {
+  resetState() {
     this.setState({
       from: undefined,
       to: undefined
@@ -30,7 +30,7 @@ export default class DayChooser extends Component {
   }
 
   handleResetClick = () => {
-    this.setState(this.getInitialState())
+    this.setState(this.resetState())
   }
 
   render() {
