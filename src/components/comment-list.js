@@ -19,7 +19,7 @@ class CommentList extends Component {
     return (
       <div>
         <button onClick={this.handleClick}>{buttonTitle}</button>
-        <ul>{this.comments}</ul>
+        <ul>{this.state.isToggleOn ? this.comments : null}</ul>
       </div>
     )
   }
