@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
-import CommentList from './comment-list'
+import CommentList from '../comment-list'
 import PropTypes from 'prop-types'
+import CSSTransition from 'react-addons-css-transition-group'
+import './style.css'
 
 export default class Article extends PureComponent {
   state = {
@@ -13,15 +15,19 @@ export default class Article extends PureComponent {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
 
-    console.log('render')
-
     return (
       <div>
         <h3>{article.title}</h3>
         <button onClick={this.handleClick} className={'test--article__btn'}>
           {buttonTitle}
         </button>
-        {this.body}
+        <CSSTransition
+          transitionName="article"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={1500}
+        >
+          {this.body}
+        </CSSTransition>
       </div>
     )
   }
@@ -48,7 +54,7 @@ Article.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.string,
     text: PropTypes.string,
-    comments: PropTypes.string
+    comments: PropTypes.array
   }),
   isOpen: PropTypes.bool.isRequired,
   toggleOpen: PropTypes.func.isRequired
