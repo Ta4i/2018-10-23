@@ -3,6 +3,9 @@ import Article from './article'
 import accordion from '../decorators/accordion'
 
 export class ArticleList extends Component {
+  componentDidMount() {
+    this.props.fetchData && this.props.fetchData()
+  }
   render() {
     return <ul>{this.items}</ul>
   }

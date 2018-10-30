@@ -30,4 +30,15 @@ describe('Article List', () => {
 
     expect(wrapper.find('.test--article__body').length).toEqual(1)
   })
+
+  it('should call fetch data', function(done) {
+    mount(
+      <DecoratedArticleList
+        articles={articles}
+        fetchData={() => {
+          done()
+        }}
+      />
+    )
+  })
 })
