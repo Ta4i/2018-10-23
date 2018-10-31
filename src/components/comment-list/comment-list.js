@@ -18,7 +18,7 @@ class CommentList extends Component {
     const { isOpen, toggleOpenItem } = this.props
     return (
       <div>
-        <button onClick={toggleOpenItem}>
+        <button onClick={toggleOpenItem} data-comments-button>
           {isOpen ? 'hide comments' : 'show comments'}
         </button>
         <CSSTransition
@@ -38,7 +38,7 @@ class CommentList extends Component {
       <ul>
         {comments.map((comment) => (
           <li key={comment.id}>
-            <Comment comment={comment} />
+            <Comment data-comment comment={comment} />
           </li>
         ))}
       </ul>
@@ -49,4 +49,5 @@ class CommentList extends Component {
   }
 }
 
+export { CommentList }
 export default toggleOpen(CommentList)
