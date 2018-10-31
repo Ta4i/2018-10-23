@@ -4,8 +4,12 @@ import React, { Component } from 'react'
 
 export default (OriginalComponent) =>
   class DecoratedComponent extends Component {
-    state = {
-      openItemId: null
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        openItemId: this.props.initialOpenItemId || null
+      }
     }
     toggleOpenItem = (openItemId) =>
       this.setState({

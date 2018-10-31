@@ -31,6 +31,21 @@ describe('Article List', () => {
     expect(wrapper.find('.test--article__body').length).toEqual(1)
   })
 
+  it('should close Article on click', function() {
+    const wrapper = mount(
+      <DecoratedArticleList
+        articles={articles}
+        initialOpenItemId={articles[0].id}
+      />
+    )
+    wrapper
+      .find('.test--article__btn')
+      .at(0)
+      .simulate('click')
+
+    expect(wrapper.find('.test--article__body').length).toEqual(0)
+  })
+
   it('should call fetch data', function(done) {
     mount(
       <DecoratedArticleList
