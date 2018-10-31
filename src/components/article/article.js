@@ -56,6 +56,5 @@ Article.propTypes = {
     text: PropTypes.string,
     comments: PropTypes.array
   }),
-  isOpen: PropTypes.bool.isRequired,
-  toggleOpen: PropTypes.func.isRequired
+  isOpen: PropTypes.bool.isRequired
 }
