@@ -8,7 +8,7 @@ export default (OriginalComponent) =>
       super(props)
 
       this.state = {
-        openItemId: this.props.initialOpenItemId || null
+        openItemId: props.initialOpenItemId || null
       }
     }
     toggleOpenItem = (openItemId) =>
