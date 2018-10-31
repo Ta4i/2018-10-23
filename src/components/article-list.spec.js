@@ -40,4 +40,24 @@ describe('Article List', () => {
       />
     )
   })
+  it('should close opened decorated article', function(done) {
+    const wrapper = mount(<DecoratedArticleList articles={articles} />)
+    var button = wrapper
+      .find('.test--article__btn')
+      .at(0)
+      .simulate('click')
+    wrapper
+      .find('.test--article__btn')
+      .at(0)
+      .simulate('click')
+    const waitForClose = () => {
+      wrapper.update()
+      if (wrapper.find('.test--article__body').length != 0) {
+        setTimeout(waitForClose, 100)
+      } else {
+        done()
+      }
+    }
+    waitForClose()
+  })
 })
