@@ -5,12 +5,9 @@ import React, { Component } from 'react'
 export default (OriginalComponent) =>
   class DecoratedComponent extends Component {
     state = {
-      openItemId: null
+      isOpen: false
     }
-    toggleOpenItem = (openItemId) =>
-      this.setState({
-        openItemId: openItemId === this.state.openItemId ? null : openItemId
-      })
+    toggleOpenItem = () => this.setState({ isOpen: !this.state.isOpen })
 
     render() {
       return (
