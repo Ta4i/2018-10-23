@@ -23,8 +23,8 @@ class CommentList extends Component {
         </button>
         <CSSTransition
           transitionName="comment-list"
-          transitionEnterTimeout={5000}
-          transitionLeaveTimeout={5000}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
         >
           {isOpen ? this.getBody() : null}
         </CSSTransition>
