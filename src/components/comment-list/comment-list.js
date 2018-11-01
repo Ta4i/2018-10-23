@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'
 
-class CommentList extends Component {
+export class CommentList extends Component {
   static propTypes = {
     comments: PropTypes.array.isRequired,
     isOpen: PropTypes.bool.isRequired,
@@ -18,7 +18,7 @@ class CommentList extends Component {
     const { isOpen, toggleOpenItem } = this.props
     return (
       <div>
-        <button onClick={toggleOpenItem}>
+        <button onClick={toggleOpenItem} className={'test--comment-list__btn'}>
           {isOpen ? 'hide comments' : 'show comments'}
         </button>
         <CSSTransition
@@ -37,7 +37,7 @@ class CommentList extends Component {
     const body = comments.length ? (
       <ul>
         {comments.map((comment) => (
-          <li key={comment.id}>
+          <li key={comment.id} className={'test--comment-list_item'}>
             <Comment comment={comment} />
           </li>
         ))}
