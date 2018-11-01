@@ -3,34 +3,28 @@ import Comment from './comment'
 import ToggleVisible from '../decorators/toggleVisible'
 
 class CommentList extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isOpen: true
-    }
-
-    this.handleClick = handleClick.bind(this)
-  }
-
   render() {
+    const { isOpen } = this.props
+
     return (
       <div>
-        {this.props.isArticleOpen && (
-          <button onClick={this.handleClick}>
-            {this.state.isOpen ? 'Hide comments' : 'Show comments'}
-          </button>
-        )}
-        <ul>{this.items}</ul>
+        <button onClick={this.handleClick}>
+          {isOpen ? 'Hide comments' : 'Show comments'}
+        </button>
+        {isOpen && <ul>{this.items}</ul>}
       </div>
     )
   }
 
+  handleClick = () => {
+    this.props.toggleVisible()
+  }
+
   get items() {
-    const { items, isArticleOpen } = this.props
+    const { items } = this.props
+
     return (
-      this.state.isOpen &&
-      isArticleOpen &&
+      this.props.isOpen &&
       items &&
       items.map((item) => (
         <li key={item.id}>
@@ -39,11 +33,6 @@ class CommentList extends Component {
       ))
     )
   }
-}
-function handleClick() {
-  this.setState({
-    isOpen: !this.state.isOpen
-  })
 }
 
 export default ToggleVisible(CommentList)

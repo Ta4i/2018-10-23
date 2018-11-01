@@ -10,6 +10,7 @@ class ArticleList extends Component {
   get items() {
     return this.props.items.map((item) => (
       <li key={item.id}>
+        {console.log('article-list before invoke Article')}
         <Article
           article={item}
           isOpen={this.props.openItemId === item.id}

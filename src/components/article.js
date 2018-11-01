@@ -8,10 +8,10 @@ export default class Article extends PureComponent {
 
     return (
       <div>
+        {console.log('зашла в return article')}
         <h3>{article.title}</h3>
         <button onClick={this.handleClick}>{buttonTitle}</button>
         {this.body}
-        <CommentList items={article.comments} isArticleOpen={isOpen} />
       </div>
     )
   }
@@ -22,9 +22,15 @@ export default class Article extends PureComponent {
 
   get body() {
     const { isOpen, article } = this.props
+    console.log('isOpen внутри body: ', isOpen)
 
     if (!isOpen) return null
 
-    return <section>{article.text}</section>
+    return (
+      <div>
+        <section>{article.text}</section>
+        <CommentList items={article.comments} />
+      </div>
+    )
   }
 }
