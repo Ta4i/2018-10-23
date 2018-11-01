@@ -5,8 +5,9 @@ import React, { Component } from 'react'
 export default (OriginalComponent) =>
   class DecoratedComponent extends Component {
     state = {
-      isOpen: false
+      isOpen: true
     }
+
     toggleOpenItem = () => this.setState({ isOpen: !this.state.isOpen })
 
     render() {

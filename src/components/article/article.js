@@ -18,7 +18,7 @@ export default class Article extends PureComponent {
       comments: PropTypes.array
     }).isRequired,
     isOpen: PropTypes.bool.isRequired,
-    toggleOpen: PropTypes.func.isRequired
+    toggleOpen: PropTypes.func
   }
 
   componentDidCatch(error) {

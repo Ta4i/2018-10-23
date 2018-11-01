@@ -16,7 +16,7 @@ class CommentList extends Component {
     const { toggleOpenItem, isOpen } = this.props
     return (
       <div>
-        <button onClick={toggleOpenItem}>
+        <button onClick={toggleOpenItem} data-test="tested-button">
           {isOpen ? 'hide comments' : 'show comments'}
         </button>
         <ReactCSSTransitionGroup
@@ -38,7 +38,7 @@ class CommentList extends Component {
     const body = comments.length ? (
       <ul>
         {comments.map((comment) => (
-          <li key={comment.id}>
+          <li key={comment.id} data-test="tested-item">
             <Comment comment={comment} />
           </li>
         ))}

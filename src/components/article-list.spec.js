@@ -31,6 +31,19 @@ describe('Article List', () => {
     expect(wrapper.find('.test--article__body').length).toEqual(1)
   })
 
+  it('should close Article on click', function() {
+    const wrapper = mount(<DecoratedArticleList articles={articles} />)
+    wrapper
+      .find('.test--article__btn')
+      .at(0)
+      .simulate('click')
+      .simulate('click')
+
+    setTimeout(() => {
+      expect(wrapper.find('.test--article__body').length).toEqual(1)
+    }, 3000)
+  })
+
   it('should call fetch data', function(done) {
     mount(
       <DecoratedArticleList
