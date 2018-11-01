@@ -1,0 +1,21 @@
+.comments-enter {
+    opacity: 0.01;
+    transform: scaleX(0) translateX(-500px);
+}
+
+.comments-enter.comments-enter-active {
+    opacity: 1;
+    transform: scaleX(1) translateX(0);
+    transition: all 500ms ease-in-out;
+}
+
+.comments-leave {
+    opacity: 1;
+    transform: scaleX(1) translateX(0);
+}
+
+.comments-leave.comments-leave-active {
+    opacity: 0.01;
+    transform: scaleX(0) translateX(-500px);
+    transition: all 300ms ease-in-out
+}
