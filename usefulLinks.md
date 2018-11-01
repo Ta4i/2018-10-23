@@ -18,3 +18,4 @@
 - https://github.com/nfl/react-helmet утилита для работы с head для React
 - https://lodash.com/ утилиты для работы с данными
 - https://momentjs.com/ утилита для работ со временем
+- https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial HTML5 Canvas
