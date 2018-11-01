@@ -41,4 +41,15 @@ describe('Article List', () => {
       />
     )
   })
+
+  it('should close Article on click after transition ends', function() {
+    const wrapper = mount(<DecoratedArticleList articles={articles} />)
+    wrapper
+      .find('.test--article__btn')
+      .at(0)
+      .simulate('click')
+      .simulate('click')
+      .simulate('transitionEnd')
+    expect(wrapper.find('.test--article__body').length).toEqual(0)
+  })
 })

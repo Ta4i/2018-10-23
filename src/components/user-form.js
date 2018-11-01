@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class UserForm extends Component {
   state = {
@@ -27,4 +28,9 @@ export default class UserForm extends Component {
       username: event.target.value
     })
   }
+}
+
+UserForm.propTypes = {
+  handleUserNameInput: PropTypes.func,
+  username: PropTypes.string
 }
