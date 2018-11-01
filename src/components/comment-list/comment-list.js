@@ -7,7 +7,7 @@ import './style.css'
 
 class CommentList extends Component {
   static propTypes = {
-    comments: PropTypes.array.isRequired,
+    comments: PropTypes.array,
     isOpen: PropTypes.bool.isRequired,
     toggleOpenItem: PropTypes.func.isRequired
   }

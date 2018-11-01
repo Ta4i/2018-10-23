@@ -7,7 +7,9 @@ import articles from '../fixtures'
 
 describe('Article List', () => {
   it('should render articles', function() {
-    const wrapper = shallow(<ArticleList articles={articles} />)
+    const wrapper = shallow(
+      <ArticleList articles={articles} toggleOpenItem={() => {}} />
+    )
 
     expect(wrapper.find('.test--article-list_item').length).toEqual(
       articles.length
@@ -15,7 +17,9 @@ describe('Article List', () => {
   })
 
   it('should render all Articles closed', function() {
-    const wrapper = render(<ArticleList articles={articles} />)
+    const wrapper = render(
+      <ArticleList articles={articles} toggleOpenItem={() => {}} />
+    )
 
     expect(wrapper.find('.test--article__body').length).toEqual(0)
   })
@@ -42,7 +46,7 @@ describe('Article List', () => {
   })
   it('should close opened decorated article', function(done) {
     const wrapper = mount(<DecoratedArticleList articles={articles} />)
-    var button = wrapper
+    wrapper
       .find('.test--article__btn')
       .at(0)
       .simulate('click')
