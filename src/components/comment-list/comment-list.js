@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
-import Comment from './comment'
-import toggleOpen from '../decorators/toggleOpen'
+import Comment from '../comment'
+import toggleOpen from '../../decorators/toggleOpen'
 import PropTypes from 'prop-types'
+import CSSTransition from 'react-addons-css-transition-group'
+import './style.css'
 
 class CommentList extends Component {
   static propTypes = {
-    comments: PropTypes.array.isRequired,
+    comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        user: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
+      }).isRequired
+    ),
     isOpen: PropTypes.bool.isRequired,
     toggleOpenItem: PropTypes.func.isRequired
   }
@@ -16,10 +23,16 @@ class CommentList extends Component {
     const { isOpen, toggleOpenItem } = this.props
     return (
       <div>
-        <button onClick={toggleOpenItem}>
+        <button onClick={toggleOpenItem} data-comments-button>
           {isOpen ? 'hide comments' : 'show comments'}
         </button>
-        {isOpen ? this.getBody() : null}
+        <CSSTransition
+          transitionName="comment-list"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          {isOpen ? this.getBody() : null}
+        </CSSTransition>
       </div>
     )
   }
@@ -30,7 +43,7 @@ class CommentList extends Component {
       <ul>
         {comments.map((comment) => (
           <li key={comment.id}>
-            <Comment comment={comment} />
+            <Comment data-comment comment={comment} />
           </li>
         ))}
       </ul>
@@ -41,4 +54,5 @@ class CommentList extends Component {
   }
 }
 
+export { CommentList }
 export default toggleOpen(CommentList)

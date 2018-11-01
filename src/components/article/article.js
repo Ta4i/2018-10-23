@@ -54,7 +54,12 @@ Article.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.string,
     text: PropTypes.string,
-    comments: PropTypes.array
+    comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        user: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
+      }).isRequired
+    )
   }),
   isOpen: PropTypes.bool.isRequired,
   toggleOpen: PropTypes.func.isRequired

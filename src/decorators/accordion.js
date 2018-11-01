@@ -1,11 +1,16 @@
 // HOC === Higher Order Component
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-export default (OriginalComponent) =>
+const decorated = (OriginalComponent) =>
   class DecoratedComponent extends Component {
-    state = {
-      openItemId: null
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        openItemId: props.initialOpenItemId || null
+      }
     }
     toggleOpenItem = (openItemId) =>
       this.setState({
@@ -22,3 +27,9 @@ export default (OriginalComponent) =>
       )
     }
   }
+
+decorated.propTypes = {
+  initialOpenItemId: PropTypes.string.isRequired
+}
+
+export default decorated
