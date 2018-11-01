@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Article from './article'
 import accordion from '../decorators/accordion'
+import PropTypes from 'prop-types'
 
 export class ArticleList extends Component {
   componentDidMount() {
@@ -24,3 +25,11 @@ export class ArticleList extends Component {
 }
 
 export default accordion(ArticleList)
+
+ArticleList.propTypes = {
+  key: PropTypes.number,
+  article: PropTypes.object,
+  isOpen: PropTypes.number,
+  toggleOpen: PropTypes.object,
+  componentDidMount: PropTypes.func
+}
