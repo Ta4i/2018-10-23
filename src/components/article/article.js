@@ -8,9 +8,23 @@ export default class Article extends PureComponent {
   state = {
     error: null
   }
+
+  static propTypes = {
+    article: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      comments: PropTypes.array
+    }).isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    toggleOpen: PropTypes.func.isRequired
+  }
+
   componentDidCatch(error) {
     this.setState({ error })
   }
+
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
@@ -48,14 +62,4 @@ export default class Article extends PureComponent {
       </section>
     )
   }
-}
-
-Article.propTypes = {
-  article: PropTypes.shape({
-    id: PropTypes.string,
-    text: PropTypes.string,
-    comments: PropTypes.array
-  }),
-  isOpen: PropTypes.bool.isRequired,
-  toggleOpen: PropTypes.func.isRequired
 }

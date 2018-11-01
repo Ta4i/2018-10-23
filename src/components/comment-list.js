@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 class CommentList extends Component {
   static propTypes = {
-    comments: PropTypes.array.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.object).isRequired,
     isOpen: PropTypes.bool.isRequired,
     toggleOpenItem: PropTypes.func.isRequired
   }

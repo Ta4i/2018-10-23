@@ -4,6 +4,7 @@ export default class UserForm extends Component {
   state = {
     username: ''
   }
+
   render() {
     return (
       <form>
