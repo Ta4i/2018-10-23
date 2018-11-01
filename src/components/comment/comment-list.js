@@ -13,9 +13,11 @@ class CommentList extends Component {
     isOpen: PropTypes.bool.isRequired,
     toggleOpenItem: PropTypes.func.isRequired
   }
-  // static defaultProps = {
-  //     comments: []
-  // }
+
+  static defaultProps = {
+    comments: []
+  }
+
   render() {
     const { isOpen, toggleOpenItem } = this.props
     return (
