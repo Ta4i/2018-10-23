@@ -40,7 +40,7 @@ describe('Article List', () => {
       .simulate('click')
 
     setTimeout(() => {
-      expect(wrapper.find('.test--article__body').length).toEqual(1)
+      expect(wrapper.find('.test--article__body').length).toEqual(0)
     }, 3000)
   })
 
