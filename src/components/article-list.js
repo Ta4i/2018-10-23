@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Article from './article'
 import accordion from '../decorators/accordion'
+import PropTypes from 'prop-types'
 
 export class ArticleList extends Component {
   componentDidMount() {
@@ -22,5 +23,17 @@ export class ArticleList extends Component {
     ))
   }
 }
+
+ArticleList.propTypes = {
+  articles: PropTypes.array.isRequired,
+  openItemId: PropTypes.string,
+  toggleOpenItem: PropTypes.func.isRequired
+}
+
+ArticleList.defaultProps = {
+  articles: []
+}
+
+// вопрос о том, как лучше писать - выносить propTypes отдельно или писать через static метод в теле класса?
 
 export default accordion(ArticleList)
