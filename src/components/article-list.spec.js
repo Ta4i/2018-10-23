@@ -8,7 +8,13 @@ Enzyme.configure({ adapter: new AdapterReact16() })
 
 describe('Article List', () => {
   it('should render articles', function() {
-    const wrapper = shallow(<ArticleList articles={articles} />)
+    const wrapper = shallow(
+      <ArticleList
+        articles={articles}
+        fetchData={() => {}}
+        toggleOpenItem={() => {}}
+      />
+    )
 
     expect(wrapper.find('.test--article-list_item').length).toEqual(
       articles.length
@@ -16,13 +22,25 @@ describe('Article List', () => {
   })
 
   it('should render all Articles closed', function() {
-    const wrapper = render(<ArticleList articles={articles} />)
+    const wrapper = render(
+      <ArticleList
+        articles={articles}
+        fetchData={() => {}}
+        toggleOpenItem={() => {}}
+      />
+    )
 
     expect(wrapper.find('.test--article__body').length).toEqual(0)
   })
 
   it('should open Article on click', function() {
-    const wrapper = mount(<DecoratedArticleList articles={articles} />)
+    const wrapper = mount(
+      <DecoratedArticleList
+        articles={articles}
+        fetchData={() => {}}
+        toggleOpenItem={() => {}}
+      />
+    )
     wrapper
       .find('.test--article__btn')
       .at(0)
@@ -36,6 +54,8 @@ describe('Article List', () => {
       <DecoratedArticleList
         articles={articles}
         initialOpenItemId={articles[0].id}
+        fetchData={() => {}}
+        toggleOpenItem={() => {}}
       />
     )
     wrapper
@@ -53,6 +73,7 @@ describe('Article List', () => {
         fetchData={() => {
           done()
         }}
+        toggleOpenItem={() => {}}
       />
     )
   })
