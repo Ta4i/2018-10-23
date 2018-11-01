@@ -31,7 +31,7 @@ describe('Article List', () => {
     expect(wrapper.find('.test--article__body').length).toEqual(1)
   })
 
-  it('should close Article on click', function() {
+  it('should close Article on click', function(done) {
     const wrapper = mount(<DecoratedArticleList articles={articles} />)
     wrapper
       .find('.test--article__btn')
@@ -39,9 +39,16 @@ describe('Article List', () => {
       .simulate('click')
       .simulate('click')
 
-    setTimeout(() => {
-      expect(wrapper.find('.test--article__body').length).toEqual(0)
-    }, 3000)
+    const wrapperAfterClose = mount(
+      <DecoratedArticleList
+        articles={articles}
+        fetchData={() => {
+          done()
+        }}
+      />
+    )
+
+    expect(wrapperAfterClose.find('.test--article__body').length).toEqual(0)
   })
 
   it('should call fetch data', function(done) {
