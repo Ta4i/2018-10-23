@@ -41,4 +41,32 @@ describe('Article List', () => {
       />
     )
   })
+
+  it('should not render article when button clicked on close', (done) => {
+    const wrapper = mount(<DecoratedArticleList articles={articles} />)
+
+    wrapper
+      .find('.test--article__btn')
+      .at(0)
+      .simulate('click')
+
+    wrapper
+      .find('.test--article__btn')
+      .at(0)
+      .simulate('click')
+
+    const waitForArticleGetClosed = () => {
+      setInterval(() => {
+        wrapper.update()
+        var numOpenArticles = wrapper.find('.test--article__body').length
+        if (numOpenArticles === 0) {
+          done()
+        } else {
+          waitForArticleGetClosed()
+        }
+      }, 1000)
+    }
+
+    waitForArticleGetClosed()
+  })
 })
