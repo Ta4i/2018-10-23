@@ -1,0 +1,17 @@
+.artcomment-enter {
+    opacity: 0.01;
+}
+
+.artcomment-enter.artcomment-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.artcomment-leave {
+    opacity: 1;
+}
+
+.artcomment-leave.artcomment-leave-active {
+    opacity: 0.01;
+    transition: opacity 1500ms ease-in;
+}
