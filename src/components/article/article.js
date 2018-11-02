@@ -24,7 +24,7 @@ export default class Article extends PureComponent {
         <CSSTransition
           transitionName="article"
           transitionEnterTimeout={500}
-          transitionLeaveTimeout={1500}
+          transitionLeaveTimeout={300}
         >
           {this.body}
         </CSSTransition>
