@@ -4,7 +4,7 @@ import toggleOpen from '../decorators/toggleOpen'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 
-class CommentList extends Component {
+export class CommentList extends Component {
   static propTypes = {
     comments: PropTypes.array.isRequired,
     isOpen: PropTypes.bool.isRequired,
@@ -34,7 +34,7 @@ class CommentList extends Component {
   getBody() {
     const { comments } = this.props
     const body = comments.length ? (
-      <ul>
+      <ul className={'test--comment__list'}>
         {comments.map((comment) => (
           <li key={comment.id}>
             <Comment comment={comment} />
