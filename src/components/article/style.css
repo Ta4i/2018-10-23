@@ -15,3 +15,21 @@
     opacity: 0.01;
     transition: opacity 1500ms ease-in;
 }
+
+.comments-enter {
+    opacity: 0.01;
+}
+
+.comments-enter.comments-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+
+.comments-leave {
+    opacity: 1;
+}
+
+.comments-leave.comments-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
