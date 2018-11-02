@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import Article from '../article'
 import accordion from '../../decorators/accordion'
@@ -34,4 +35,8 @@ export class ArticleList extends Component {
   }
 }
 
-export default accordion(ArticleList)
+const mapStateToProps = (store) => ({
+  articles: store.articles // from store
+})
+
+export default connect(mapStateToProps)(accordion(ArticleList))
