@@ -11,11 +11,16 @@
 - http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/ React.Component Lifecycle
 - https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/ Controlled vs Uncontrolled Component
 - https://reactjs.org/docs/animation.html Анимации в React
+- https://cdn-images-1.medium.com/max/1600/1*CBfav7WP_SuV_UV87N1_Og.png Redux flow
+
 
 ### Библиотеки, фреймворки:
+- https://redux.js.org/
+- https://react-redux.js.org/
 - https://jestjs.io/ тест раннер
 - https://airbnb.io/enzyme/ утилита для тестирования React компонент
 - https://github.com/nfl/react-helmet утилита для работы с head для React
 - https://lodash.com/ утилиты для работы с данными
 - https://momentjs.com/ утилита для работ со временем
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial HTML5 Canvas
+- https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en React dev tools
