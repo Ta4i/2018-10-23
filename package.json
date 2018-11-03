@@ -7,8 +7,10 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-day-picker": "^7.2.4",
     "react-dom": "^16.6.0",
+    "react-redux": "^5.1.0",
     "react-scripts": "2.0.5",
-    "react-select": "^2.1.1"
+    "react-select": "^2.1.1",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
