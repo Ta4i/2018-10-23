@@ -10,14 +10,14 @@ describe('Comment List', () => {
   // моковые данные
   const comments = items[0].comments
 
-  it('Test render CommentList', function() {
+  it('should render CommentList', function() {
     const wrapper = render(<CommentList items={comments} />)
 
     expect(wrapper.find('.test-comment-list-item').length).toEqual(0) // нет комментов - изначально закрыты
   })
 })
 
-it('Test render Comment on click', function() {
+it('should render Comment on click', function() {
   // моковые данные
   const comments = items[4].comments
   const wrapper = mount(<DecorComent items={comments} />)
