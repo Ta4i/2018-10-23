@@ -34,7 +34,7 @@ describe('Article List', () => {
   })
 
   // Тест на закрытие статьи - перед тестом надо отключить (закомментироовать) анимацию в Article, так как события в mount отрабатывают быстрее, чем анимация
-  it('Test render Article on click Close', function(done) {
+  it('should render Article on click Close', function(done) {
     const wrapper = mount(
       <DecorArticleList
         items={articles}
@@ -48,7 +48,7 @@ describe('Article List', () => {
     // кликнули первывй раз и открыли статью
     btn.simulate('click')
 
-    // проверилил, что текст на кнопке теперь  = close
+    // проверили, что текст на кнопке теперь  = close
     expect(btn.text()).toEqual('close')
 
     // проверили, что есть одна открытая статья
