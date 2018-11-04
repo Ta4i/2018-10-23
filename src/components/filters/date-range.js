@@ -6,26 +6,25 @@ export default class Example extends React.Component {
   static defaultProps = {
     numberOfMonths: 2
   }
-  constructor(props) {
-    super(props)
 
-    this.state = this.getInitialState()
+  handleDayClick = (day) => {
+    const { dateRange, dateRangeChanged } = this.props
+    const newRange = DateUtils.addDayToRange(day, dateRange)
+    dateRangeChanged(newRange)
   }
-  getInitialState() {
-    return {
+
+  handleResetClick = () => {
+    const { dateRangeChanged } = this.props
+    dateRangeChanged({
       from: undefined,
       to: undefined
-    }
+    })
   }
-  handleDayClick = (day) => {
-    const range = DateUtils.addDayToRange(day, this.state)
-    this.setState(range)
-  }
-  handleResetClick = () => {
-    this.setState(this.getInitialState())
-  }
+
   render() {
-    const { from, to } = this.state
+    const {
+      dateRange: { from, to }
+    } = this.props
     const modifiers = { start: from, end: to }
     return (
       <div className="RangeExample">
