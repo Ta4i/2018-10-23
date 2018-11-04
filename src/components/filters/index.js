@@ -10,11 +10,11 @@ class Filters extends Component {
       <div>
         <Select
           articles={this.props.articles}
-          selectedOption={this.props.filter.selectedArticles}
+          selectedOption={this.props.articlesFilter}
           selectedArticlesChanged={this.props.selectedArticlesChanged}
         />
         <DateRange
-          dateRange={this.props.filter.dateRange}
+          dateRange={this.props.dateFilter}
           dateRangeChanged={this.props.dateRangeChanged}
         />
       </div>
@@ -23,10 +23,10 @@ class Filters extends Component {
 }
 
 const mapStateToProps = (store) => {
-  console.log('filter = ' + JSON.stringify(store.filter))
   return {
     articles: store.articles,
-    filter: store.filter
+    dateFilter: store.dateFilter,
+    articlesFilter: store.articlesFilter
   }
 }
 

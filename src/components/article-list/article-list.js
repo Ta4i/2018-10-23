@@ -35,8 +35,14 @@ export class ArticleList extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
-  articles: store.articles // from store
-})
+const mapStateToProps = (store) => {
+  const { articles, articlesFilter } = store
+  const filteredArticles = articles.filter((a) =>
+    articlesFilter.some((sa) => sa.value === a.id)
+  )
+  return {
+    articles: filteredArticles
+  }
+}
 
 export default connect(mapStateToProps)(accordion(ArticleList))
