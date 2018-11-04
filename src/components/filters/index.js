@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Select from './select'
 import DateRange from './date-range'
+import { connect } from 'react-redux'
 
 class Filters extends Component {
   render() {
@@ -13,4 +14,8 @@ class Filters extends Component {
   }
 }
 
-export default Filters
+const mapStateToProps = (store) => ({
+  articles: store.articles
+})
+
+export default connect(mapStateToProps)(Filters)
