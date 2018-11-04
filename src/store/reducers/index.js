@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import counterReducer from './counter'
 import articlesReducer from './articles'
+import selectArticlesReducer from './filter-by-select'
 
 export default combineReducers({
   count: counterReducer,
-  articles: articlesReducer
+  articles: articlesReducer,
+  filteredArticlesBySelect: selectArticlesReducer
 })

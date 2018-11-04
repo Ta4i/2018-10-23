@@ -23,7 +23,15 @@ export class ArticleList extends Component {
   }
 
   get items() {
-    return this.props.articles.map((item) => (
+    var filterdArticles = this.props.articles
+
+    if (this.props.filteredArticlesBySelect.length > 0) {
+      filterdArticles = filterdArticles.filter(
+        (a) => !this.props.filteredArticlesBySelect.includes(a.id)
+      )
+    }
+
+    return filterdArticles.map((item) => (
       <li key={item.id} className={'test--article-list_item'}>
         <Article
           article={item}
@@ -36,7 +44,8 @@ export class ArticleList extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  articles: store.articles // from store
+  articles: store.articles,
+  filteredArticlesBySelect: store.filteredArticlesBySelect
 })
 
 export default connect(mapStateToProps)(accordion(ArticleList))
