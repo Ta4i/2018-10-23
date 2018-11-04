@@ -35,8 +35,32 @@ export class ArticleList extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
-  articles: store.articles // from store
-})
+const filterByDate = (date, from, to) => {
+  var dt = Date.parse(date)
+  if (!from || !to) {
+    return true
+  }
+  return from <= dt && dt < to
+}
+
+const mapStateToProps = (store) => {
+  const {
+    articles,
+    articlesFilter,
+    dateFilter: { from, to }
+  } = store
+  let toCopy = to === undefined ? undefined : new Date(to)
+  if (toCopy) {
+    toCopy.setDate(toCopy.getDate() + 1)
+  }
+  const filteredArticles = articles.filter((a) =>
+    articlesFilter.some(
+      (sa) => sa.value === a.id && filterByDate(a.date, from, toCopy)
+    )
+  )
+  return {
+    articles: filteredArticles
+  }
+}
 
 export default connect(mapStateToProps)(accordion(ArticleList))
