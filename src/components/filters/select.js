@@ -9,7 +9,6 @@ class SelectFilter extends Component {
       <Select
         options={this.optionsForSelect}
         onChange={this.handleChange}
-        //value={this.state.selectedOption}
         isMulti
       />
     )

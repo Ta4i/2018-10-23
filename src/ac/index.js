@@ -1,4 +1,9 @@
-import { INCREMENT, DELETE_ARTICLE, FILTER_BY_SELECT } from '../constants'
+import {
+  INCREMENT,
+  DELETE_ARTICLE,
+  FILTER_BY_SELECT,
+  FILTER_BY_DATE
+} from '../constants'
 
 export function incrementActionCreator() {
   return { type: INCREMENT }
@@ -15,5 +20,12 @@ export function filterArticlesBySelect(articleIds) {
   return {
     type: FILTER_BY_SELECT,
     payload: articleIds
+  }
+}
+
+export function filterByDate(from, to) {
+  return {
+    type: FILTER_BY_DATE,
+    payload: { from, to }
   }
 }
