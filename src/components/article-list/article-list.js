@@ -23,20 +23,41 @@ export class ArticleList extends Component {
   }
 
   get items() {
-    return this.props.articles.map((item) => (
-      <li key={item.id} className={'test--article-list_item'}>
-        <Article
-          article={item}
-          isOpen={this.props.openItemId === item.id}
-          toggleOpen={this.props.toggleOpenItem}
-        />
-      </li>
-    ))
+    const { articles, selectedArticles } = this.props
+
+    if (selectedArticles.length > 0) {
+      const filteredArticlesList = articles.filter((article) => {
+        return selectedArticles.some((selected) => {
+          return selected.value === article.id
+        })
+      })
+
+      return filteredArticlesList.map((item) => (
+        <li key={item.id} className={'test--article-list_item'}>
+          <Article
+            article={item}
+            isOpen={this.props.openItemId === item.id}
+            toggleOpen={this.props.toggleOpenItem}
+          />
+        </li>
+      ))
+    } else {
+      return articles.map((item) => (
+        <li key={item.id} className={'test--article-list_item'}>
+          <Article
+            article={item}
+            isOpen={this.props.openItemId === item.id}
+            toggleOpen={this.props.toggleOpenItem}
+          />
+        </li>
+      ))
+    }
   }
 }
 
 const mapStateToProps = (store) => ({
-  articles: store.articles // from store
+  articles: store.articles, // from store,
+  selectedArticles: store.selectedArticles
 })
 
 export default connect(mapStateToProps)(accordion(ArticleList))
