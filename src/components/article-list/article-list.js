@@ -23,7 +23,22 @@ export class ArticleList extends Component {
   }
 
   get items() {
-    return this.props.articles.map((item) => (
+    const filteredArticles = this.props.articleForFilter[0]
+      ? this.props.articles.filter((it) =>
+          this.props.articleForFilter.some((item) => item.value === it.id)
+        )
+      : this.props.articles
+
+    const inRangeArticles =
+      this.props.currentRange.from && this.props.currentRange.to
+        ? filteredArticles.filter(
+            (it) =>
+              Date.parse(it.date) >= Date.parse(this.props.currentRange.from) &&
+              Date.parse(it.date) <= Date.parse(this.props.currentRange.to)
+          )
+        : filteredArticles
+
+    return inRangeArticles.map((item) => (
       <li key={item.id} className={'test--article-list_item'}>
         <Article
           article={item}
@@ -36,7 +51,9 @@ export class ArticleList extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  articles: store.articles // from store
+  articles: store.articles,
+  articleForFilter: store.articleForFilter,
+  currentRange: store.currentRange
 })
 
 export default connect(mapStateToProps)(accordion(ArticleList))

@@ -72,7 +72,11 @@ Article.propTypes = {
   toggleOpen: PropTypes.func.isRequired
 }
 
+const mapStateToProps = (store) => ({
+  articleForFilter: store.articleForFilter
+})
+
 export default connect(
-  null,
+  mapStateToProps,
   { dispatchDeleteArticle: deleteArticle }
 )(Article)
