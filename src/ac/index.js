@@ -1,12 +1,12 @@
-import { INCREMENT, DELETE_ARTICLE } from '../constants'
+import * as consts from '../constants'
 
 export function incrementActionCreator() {
-  return { type: INCREMENT }
+  return { type: consts.INCREMENT }
 }
 
 export function deleteArticle(articleId) {
   return {
-    type: DELETE_ARTICLE,
+    type: consts.DELETE_ARTICLE,
     payload: articleId
   }
 }

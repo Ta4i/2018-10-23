@@ -1,3 +1,9 @@
 export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+
+export const SELECT_FILTER = 'SELECT_FILTER'
+
+export const RANGE_SELECTED = 'RANGE_SELECTED'
+export const RANGE_RESET = 'RANGE_RESET'
 
 export const DELETE_ARTICLE = 'DELETE_ARTICLE'
