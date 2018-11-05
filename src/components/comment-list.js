@@ -1,30 +1,44 @@
 import React, { Component } from 'react'
 import Comment from './comment'
-import accordion from '../decorators/accordion'
+import toggleOpenItem from './../decorators/toggleOpen'
 
 class CommentList extends Component {
   render() {
+    const { isOpen, toggleOpenItem } = this.props
+    const text = isOpen ? 'hide comments' : 'show comments'
     return (
       <div>
-        <ul>{this.items}</ul>
+        <button onClick={toggleOpenItem} className="test--comment-list__btn">
+          {text}
+        </button>
+        {this.getBody()}
       </div>
     )
   }
 
-  get items() {
-    if (this.props.comments) {
-      return this.props.comments.map((item) => (
-        <li key={item.id}>
-          <Comment
-            comment={item}
-            isOpen={this.props.openItemId === item.id}
-            toggleOpen={this.props.toggleOpenItem}
-          />
-        </li>
-      ))
-    }
-    return null
+  getBody() {
+    const { comments = [], isOpen } = this.props
+    if (!isOpen) return null
+    return (
+      <div className="test--comment-list__body">
+        {comments.length ? (
+          this.comments
+        ) : (
+          <h3 className="test--comment-list__empty">No comments yet</h3>
+        )}
+      </div>
+    )
+  }
+  get comments() {
+    return (
+      <ul>
+        {this.props.comments.map((comment) => (
+          <li key={comment.id} className="test--comment-list__item">
+            <Comment comment={comment} />
+          </li>
+        ))}
+      </ul>
+    )
   }
 }
-
-export default accordion(CommentList)
+export default toggleOpenItem(CommentList)

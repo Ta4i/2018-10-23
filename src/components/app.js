@@ -18,7 +18,7 @@ export default class App extends Component {
           options={this.optionsForSelect}
           onChange={this.handleSelectChange}
           value={this.state.selectedOption}
-          isMulti={true}
+          isMulti
         />
         <ArticleList items={articles} />
       </div>

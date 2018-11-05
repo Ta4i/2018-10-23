@@ -19,17 +19,13 @@ export default class Article extends PureComponent {
 
   handleClick = () => {
     const { isOpen } = this.props
-    if (!isOpen) {
-      this.props.toggleOpen(this.props.article.id)
-      return
-    }
-    this.props.toggleOpen(null)
+    this.props.toggleOpen(!isOpen ? this.props.article.id : null)
   }
 
   get body() {
     const { isOpen, article } = this.props
 
-    if (!isOpen) return <section />
+    if (!isOpen) return null
 
     return (
       <div>

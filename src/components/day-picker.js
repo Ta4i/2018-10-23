@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import Helmet from 'react-helmet'
 
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
@@ -73,8 +72,7 @@ export default class DayPicker extends Component {
             onDayChange={this.handleToChange}
           />
         </span>
-        <Helmet>
-          <style>{`
+        <style>{`
       .InputFromTo .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
         background-color: #f0f8ff !important;
         color: #4a90e2;
@@ -97,7 +95,6 @@ export default class DayPicker extends Component {
         margin-left: -198px;
       }
     `}</style>
-        </Helmet>
       </div>
     )
   }
