@@ -1,31 +1,25 @@
 import React from 'react'
 import DayPicker, { DateUtils } from 'react-day-picker'
+import { connect } from 'react-redux'
+import { selectDateRange } from '../../ac'
 import 'react-day-picker/lib/style.css'
 
-export default class Example extends React.Component {
+class DateRange extends React.Component {
   static defaultProps = {
     numberOfMonths: 2
   }
-  constructor(props) {
-    super(props)
 
-    this.state = this.getInitialState()
-  }
-  getInitialState() {
-    return {
-      from: undefined,
-      to: undefined
-    }
-  }
   handleDayClick = (day) => {
-    const range = DateUtils.addDayToRange(day, this.state)
-    this.setState(range)
+    const range = DateUtils.addDayToRange(day, this.props.selectedDateRange)
+    this.props.dispatchSelectDateRange(range)
   }
+
   handleResetClick = () => {
-    this.setState(this.getInitialState())
+    this.props.dispatchSelectDateRange({ from: null, to: null })
   }
+
   render() {
-    const { from, to } = this.state
+    const { from, to } = this.props.selectedDateRange
     const modifiers = { start: from, end: to }
     return (
       <div className="RangeExample">
@@ -49,8 +43,25 @@ export default class Example extends React.Component {
           selectedDays={[from, { from, to }]}
           modifiers={modifiers}
           onDayClick={this.handleDayClick}
+          initialMonth={this.props.initialMonth}
         />
       </div>
     )
   }
 }
+
+const mapStateToProps = (store) => ({
+  selectedDateRange: store.selectedDateRange,
+  initialMonth: getInitialMonth(store)
+})
+
+const getInitialMonth = (store) => {
+  const dates = store.articles.map((article) => new Date(article.date))
+  const minDate = new Date(Math.min.apply(null, dates))
+  return minDate
+}
+
+export default connect(
+  mapStateToProps,
+  { dispatchSelectDateRange: selectDateRange }
+)(DateRange)

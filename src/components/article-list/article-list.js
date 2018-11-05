@@ -36,7 +36,29 @@ export class ArticleList extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  articles: store.articles // from store
+  articles: filterArticles(store)
 })
+
+const filterArticles = (store) => {
+  let filtered = store.articles
+
+  filtered = filtered.filter((article) =>
+    store.selectedArticleIds.includes(article.id)
+  )
+
+  if (store.selectedDateRange.from) {
+    filtered = filtered.filter(
+      (article) => new Date(article.date) >= store.selectedDateRange.from
+    )
+  }
+
+  if (store.selectedDateRange.to) {
+    filtered = filtered.filter(
+      (article) => new Date(article.date) <= store.selectedDateRange.to
+    )
+  }
+
+  return filtered
+}
 
 export default connect(mapStateToProps)(accordion(ArticleList))
