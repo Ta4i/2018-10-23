@@ -1,30 +1,34 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getUsername } from '../../ac'
 
-export default class UserForm extends Component {
-  state = {
-    username: ''
-  }
+class UserForm extends Component {
   render() {
+    const { username } = this.props
+
     return (
       <form>
         Username:
-        <input
-          value={this.state.username}
-          onChange={this.handleUserNameInput}
-        />
+        <input value={username} onChange={this.handleUserNameInput} />
+        <p>You Username is: {username}</p>
       </form>
     )
   }
 
   handleUserNameInput = (event) => {
-    if (event.target.value.length > 10) {
-      return this.setState({
-        username: ''
-      })
-    }
-
-    this.setState({
-      username: event.target.value
-    })
+    this.props.dispatchUsername(event.target.value)
   }
 }
+
+const mapStateToProps = (store) => ({
+  username: store.username
+})
+
+const mapDispatchToProps = {
+  dispatchUsername: getUsername
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserForm)
