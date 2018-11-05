@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
+import { connect } from 'react-redux'
+import { filerSelect } from '../../ac'
 
 class SelectFilter extends Component {
   state = {
@@ -26,7 +28,12 @@ class SelectFilter extends Component {
 
   handleSelectChange = (selectedOption) => {
     this.setState({ selectedOption })
+    this.props.dispatchFilterSelect(selectedOption)
+    console.log('Select.js handleSelectChange', selectedOption)
   }
 }
 
-export default SelectFilter
+export default connect(
+  null,
+  { dispatchFilterSelect: filerSelect }
+)(SelectFilter)
