@@ -2,6 +2,15 @@ import { createSelector } from 'reselect'
 
 export const filtersSelector = (state) => state.filters
 export const articlesSelector = (state) => state.articles
+export const commentsSelector = (state) => state.comments
+export const idSelector = (_, props) => props.id
+
+export const createCommentSelector = () => {
+  return createSelector(commentsSelector, idSelector, (comments, id) => {
+    console.log('commentSelector', id)
+    return comments.find((comment) => comment.id === id)
+  })
+}
 
 export const filteredArticleSelector = createSelector(
   filtersSelector,

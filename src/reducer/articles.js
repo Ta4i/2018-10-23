@@ -1,7 +1,7 @@
 import { DELETE_ARTICLE } from '../constants/index'
-import articles from '../fixtures'
+import { normalizedArticles } from '../fixtures'
 
-export default (articleState = articles, action) => {
+export default (articleState = normalizedArticles, action) => {
   if (action.type === DELETE_ARTICLE) {
     return articleState.filter((article) => article.id !== action.payload.id)
   }
