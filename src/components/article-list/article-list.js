@@ -9,6 +9,7 @@ export class ArticleList extends Component {
   static propTypes = {
     articles: PropTypes.array.isRequired,
     fetchData: PropTypes.func,
+    articlesFilter: PropTypes.array,
 
     //from accordion decorator
     openItemId: PropTypes.string,
@@ -35,8 +36,26 @@ export class ArticleList extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
-  articles: store.articles // from store
-})
+const mapStateToProps = (store) => {
+  const {
+    articles,
+    articlesFilter,
+    dateRange: { from, to }
+  } = store
+  let selectedArticles =
+    articlesFilter.length > 0
+      ? articles.filter((a) => articlesFilter.includes(a.id))
+      : articles
+  if (from !== undefined) {
+    selectedArticles = selectedArticles.filter((a) => a.date >= from)
+  }
+  if (to !== undefined) {
+    selectedArticles = selectedArticles.filter((a) => a.date <= to)
+  }
+
+  return {
+    articles: selectedArticles
+  }
+}
 
 export default connect(mapStateToProps)(accordion(ArticleList))
