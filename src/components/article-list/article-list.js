@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { filteredArticleSelector } from '../../selectors'
 
 import Article from '../article'
 import accordion from '../../decorators/accordion'
@@ -19,6 +20,7 @@ export class ArticleList extends Component {
     this.props.fetchData && this.props.fetchData()
   }
   render() {
+    console.log('render articles-list')
     return <ul>{this.items}</ul>
   }
 
@@ -36,22 +38,9 @@ export class ArticleList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {
-    selected,
-    dateRange: { from, to }
-  } = state.filters
-
-  const filteredArticles = state.articles.filter((article) => {
-    const published = Date.parse(article.date)
-
-    return (
-      (!selected.length ||
-        selected.find((selected) => selected.value === article.id)) &&
-      (!from || !to || (published > from && published < to))
-    )
-  })
+  console.log('connect articles-list')
   return {
-    articles: filteredArticles
+    articles: filteredArticleSelector(state)
   }
 }
 
