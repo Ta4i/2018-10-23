@@ -10,7 +10,7 @@ const composeEnhancers =
     : compose
 
 const enhancer = composeEnhancers(
-  applyMiddleware(logger)
+  applyMiddleware(logger, mw2)
   // other store enhancers if any
 )
 const store = createStore(reducer, enhancer)
