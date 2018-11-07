@@ -46,9 +46,9 @@ class CommentList extends Component {
   get comments() {
     return (
       <ul>
-        {this.props.comments.map((comment) => (
-          <li key={comment.id} className="test--comment-list__item">
-            <Comment comment={comment} />
+        {this.props.comments.map((commentId) => (
+          <li key={commentId} className="test--comment-list__item">
+            <Comment id={commentId} />
           </li>
         ))}
       </ul>
