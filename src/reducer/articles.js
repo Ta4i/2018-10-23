@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE } from '../constants/index'
+import { ADD_COMMENT, DELETE_ARTICLE } from '../constants/index'
 import { normalizedArticles } from '../fixtures'
 
 const defaultArticle = normalizedArticles.reduce((acc, article) => {
@@ -7,11 +7,14 @@ const defaultArticle = normalizedArticles.reduce((acc, article) => {
 }, {})
 
 export default (articleState = defaultArticle, action) => {
-  if (action.type === DELETE_ARTICLE) {
-    console.log('Article Reducer - articleState', articleState)
-    return Object.values(articleState).filter(
-      (article) => article.id !== action.payload.id
-    )
+  switch (action.type) {
+    case DELETE_ARTICLE:
+      return Object.values(articleState).filter(
+        (article) => article.id !== action.payload.id
+      )
+    // case ADD_COMMENT:
+    //   return
+    default:
+      return articleState
   }
-  return articleState
 }
