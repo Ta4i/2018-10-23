@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import CommentList from '../comment-list'
+import CommentForm from '../comment-form/comment-form'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CSSTransition from 'react-addons-css-transition-group'
@@ -56,6 +57,7 @@ class Article extends PureComponent {
     return (
       <section className={'test--article__body'}>
         {article.text}
+        <CommentForm />
         {this.state.error ? null : <CommentList comments={article.comments} />}
       </section>
     )
