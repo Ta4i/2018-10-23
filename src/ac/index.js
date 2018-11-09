@@ -32,7 +32,6 @@ export function changeSelection(selected) {
 }
 
 export function addComment(comment) {
-  console.log('Comment from AC', comment)
   return {
     type: ADD_COMMENT,
     payload: comment // = { name, text, id }

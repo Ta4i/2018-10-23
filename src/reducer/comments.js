@@ -1,4 +1,5 @@
 import { normalizedComments } from '../fixtures'
+import { ADD_COMMENT } from '../constants'
 
 const defaultComment = normalizedComments.reduce((acc, comment) => {
   acc[comment.id] = comment
@@ -6,5 +7,11 @@ const defaultComment = normalizedComments.reduce((acc, comment) => {
 }, {})
 
 export default (commentState = defaultComment, action) => {
+  console.log('Reducer: commentState', commentState)
+  if (action.type === ADD_COMMENT) {
+    const commentEntry = {}
+    commentEntry[action.payload.id] = action.payload
+    return { ...commentState, ...commentEntry }
+  }
   return commentState
 }
