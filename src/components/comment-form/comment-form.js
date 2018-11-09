@@ -10,7 +10,8 @@ class CommentForm extends Component {
     this.state = {
       commentForm: {
         name: '',
-        text: ''
+        text: '',
+        articleId: this.props.articleId
       }
     }
 
@@ -21,6 +22,7 @@ class CommentForm extends Component {
 
   render() {
     const { toggleOpenItem } = this.props
+
     return (
       <div>
         <button onClick={toggleOpenItem} className="test--comment-form__btn">
