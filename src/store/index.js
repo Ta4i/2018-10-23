@@ -13,6 +13,7 @@ const enhancer = composeEnhancers(
   applyMiddleware(logger)
   // other store enhancers if any
 )
+
 const store = createStore(reducer, enhancer)
 
 window.store = store
