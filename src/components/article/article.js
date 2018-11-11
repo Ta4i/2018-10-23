@@ -10,9 +10,11 @@ class Article extends PureComponent {
   state = {
     error: null
   }
+
   componentDidCatch(error) {
     this.setState({ error })
   }
+
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
@@ -56,7 +58,7 @@ class Article extends PureComponent {
     return (
       <section className={'test--article__body'}>
         {article.text}
-        {this.state.error ? null : <CommentList comments={article.comments} />}
+        {this.state.error ? null : <CommentList article={article} />}
       </section>
     )
   }

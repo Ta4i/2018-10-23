@@ -11,16 +11,26 @@ export const createCommentSelector = () => {
   })
 }
 
-export const filteredArticleSelector = createSelector(
-  filtersSelector,
+export const articleBackSelector = createSelector(
   articlesSelector,
-  (filters, articles) => {
+  (keyedArticles) => Object.values(keyedArticles)
+)
+
+export const filtersBackSelector = createSelector(
+  filtersSelector,
+  (filters) => filters.selected
+)
+
+export const filteredArticleSelector = createSelector(
+  articleBackSelector,
+  filtersSelector,
+  (articles, filters) => {
     const {
       selected,
       dateRange: { from, to }
     } = filters
-    console.log('selector articles-list')
 
+    console.log('selector articles-list')
     return articles.filter((article) => {
       const published = Date.parse(article.date)
 

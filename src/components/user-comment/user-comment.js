@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addComment } from '../../ac'
 
 const MAX_SIZE = 30
 const MIN_SIZE = 3
@@ -6,13 +8,12 @@ const MIN_SIZE = 3
 class UserComment extends Component {
   state = {
     user: '',
-    text: '',
-    isValid: true
+    text: ''
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <label>
           Name:{' '}
           <input
@@ -41,7 +42,7 @@ class UserComment extends Component {
           Send comment
         </button>
         <span style={{ color: 'red' }}>
-          {this.state.isValid
+          {this.checkValidity()
             ? ''
             : 'Both of fields should contain from 3 to 30 letters'}
         </span>
@@ -49,17 +50,32 @@ class UserComment extends Component {
     )
   }
 
-  handleSubmit = (evt) => {
-    evt.preventDefault()
-    this.setState({
-      user: '',
-      text: '',
-      isValid: true
+  checkValidity = () => {
+    let validMarker = 0
+    ;['user', 'text'].forEach((field) => {
+      if (
+        this.state[field].length < MIN_SIZE ||
+        this.state[field].length > MAX_SIZE
+      ) {
+        validMarker++
+      }
     })
 
-    this.checkValidity()
+    return !validMarker
+  }
 
-    console.log(this.state)
+  handleSubmit = (evt) => {
+    evt.preventDefault()
+
+    if (this.checkValidity()) {
+      this.props.addComment(this.state)
+      this.setState({
+        user: '',
+        text: ''
+      })
+    }
+
+    console.log('submit', this.state)
   }
 
   handleChange = (field) => (evt) => {
@@ -67,16 +83,11 @@ class UserComment extends Component {
       [field]: evt.target.value
     })
   }
-
-  checkValidity = () => {
-    ;['user', 'text'].forEach(
-      (field) =>
-        this.state[field].length < MIN_SIZE ||
-        this.state[field].length > MAX_SIZE
-          ? this.setState({ isValid: false })
-          : null
-    )
-  }
 }
 
-export default UserComment
+export default connect(
+  null,
+  (dispatch, ownProps) => ({
+    addComment: (comment) => dispatch(addComment(comment, ownProps.currentId))
+  })
+)(UserComment)

@@ -7,7 +7,7 @@ import toggleOpenItem from '../../decorators/toggleOpen'
 
 class CommentList extends Component {
   static propTypes = {
-    comments: PropTypes.array,
+    article: PropTypes.object.isRequired,
     //from toggleOpenItem decorator
     isOpen: PropTypes.bool,
     toggleOpenItem: PropTypes.func
@@ -16,6 +16,7 @@ class CommentList extends Component {
   render() {
     const { isOpen, toggleOpenItem } = this.props
     const text = isOpen ? 'hide comments' : 'show comments'
+
     return (
       <div>
         <button onClick={toggleOpenItem} className="test--comment-list__btn">
@@ -32,9 +33,13 @@ class CommentList extends Component {
     )
   }
   getBody() {
-    const { comments = [], isOpen } = this.props
+    const {
+      article: { comments = [], id },
+      isOpen
+    } = this.props
 
     if (!isOpen) return null
+
     return (
       <div className="test--comment-list__body">
         {comments.length ? (
@@ -42,14 +47,18 @@ class CommentList extends Component {
         ) : (
           <h3 className="test--comment-list__empty">No comments yet</h3>
         )}
-        <UserComment />
+        <UserComment currentId={id} />
       </div>
     )
   }
   get comments() {
+    const {
+      article: { comments = [] }
+    } = this.props
+
     return (
       <ul>
-        {this.props.comments.map((commentId) => (
+        {comments.map((commentId) => (
           <li key={commentId} className="test--comment-list__item">
             <Comment id={commentId} />
           </li>

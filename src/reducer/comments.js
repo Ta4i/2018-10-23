@@ -1,10 +1,18 @@
-import { normalizedComments } from '../fixtures'
+import { ADD_COMMENT } from '../constants/index'
+import { keyedComments } from '../fixtures'
 
-const defaultComment = normalizedComments.reduce((acc, comment) => {
-  acc[comment.id] = comment
-  return acc
-}, {})
+export default (comments = keyedComments, action) => {
+  switch (action.type) {
+    case ADD_COMMENT:
+      return {
+        ...comments,
+        [action.uniqueId]: {
+          ...action.payload.comment,
+          id: action.uniqueId
+        }
+      }
 
-export default (commentState = defaultComment, action) => {
-  return commentState
+    default:
+      return comments
+  }
 }

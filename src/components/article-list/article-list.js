@@ -19,26 +19,29 @@ export class ArticleList extends Component {
   componentDidMount() {
     this.props.fetchData && this.props.fetchData()
   }
+
   render() {
     console.log('render articles-list')
+
     return <ul>{this.items}</ul>
   }
 
   get items() {
-    return this.props.articles.map((item) => (
+    return this.props.articles.map((item, ind) => (
       <li key={item.id} className={'test--article-list_item'}>
         <Article
           article={item}
           isOpen={this.props.openItemId === item.id}
           toggleOpen={this.props.toggleOpenItem}
+          index={ind}
         />
       </li>
     ))
   }
 }
-
 const mapStateToProps = (state) => {
   console.log('connect articles-list')
+
   return {
     articles: filteredArticleSelector(state)
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Select from 'react-select'
 import { connect } from 'react-redux'
 import { changeSelection } from '../../ac'
-import { filtersSelector, articlesSelector } from '../../selectors'
+import { articleBackSelector, filtersBackSelector } from '../../selectors'
 
 class SelectFilter extends Component {
   render() {
@@ -30,8 +30,8 @@ class SelectFilter extends Component {
 
 export default connect(
   (state) => ({
-    selected: filtersSelector(state).selected,
-    articles: articlesSelector(state)
+    selected: filtersBackSelector(state),
+    articles: articleBackSelector(state)
   }),
   { changeSelection }
 )(SelectFilter)
