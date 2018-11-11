@@ -25,7 +25,12 @@ class CommentForm extends Component {
           />
         </p>
         <p>
-          <button onClick={this.handleSubmit}>submit</button>
+          <button
+            onClick={this.handleSubmit}
+            disabled={!this.props.submitEnabled}
+          >
+            submit
+          </button>
         </p>
       </div>
     )
@@ -46,7 +51,8 @@ class CommentForm extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.submittingComment.user,
-  text: state.submittingComment.text
+  text: state.submittingComment.text,
+  submitEnabled: state.submittingComment.enabled
 })
 
 const mapDispatchToProps = {

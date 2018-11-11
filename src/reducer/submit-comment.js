@@ -6,16 +6,23 @@ import {
 
 const initialState = {
   user: '',
-  text: ''
+  text: '',
+  enabled: false
 }
+
+const checkIfSubmitEnabled = (state) => state.user !== '' && state.text !== ''
 
 export default (submittingComment = initialState, action) => {
   if (action.type === SET_COMMENT_NAME) {
-    return { ...submittingComment, user: action.payload }
+    let result = { ...submittingComment, user: action.payload }
+    result.enabled = checkIfSubmitEnabled(result)
+    return result
   }
 
   if (action.type === SET_COMMENT_TEXT) {
-    return { ...submittingComment, text: action.payload }
+    let result = { ...submittingComment, text: action.payload }
+    result.enabled = checkIfSubmitEnabled(result)
+    return result
   }
 
   if (action.type === CLEAR_SUBMITTING_COMMENT) {
