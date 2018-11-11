@@ -1,24 +1,31 @@
 // HOC === Higher Order Component
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { openCloseItem } from '../ac'
 
-export default (OriginalComponent) =>
+export default (OriginalComponent) => {
   class DecoratedComponent extends Component {
-    state = {
-      openItemId: null
-    }
-    toggleOpenItem = (openItemId) =>
-      this.setState({
-        openItemId: openItemId === this.state.openItemId ? null : openItemId
-      })
-
     render() {
       return (
         <OriginalComponent
           {...this.props}
-          {...this.state}
-          toggleOpenItem={this.toggleOpenItem}
+          toggleOpenItem={this.props.handleOpenCloseItem}
         />
       )
     }
   }
+
+  const mapStateToProps = (store) => ({
+    openItemId: store.openItemId
+  })
+
+  const mapDispatchToProps = {
+    handleOpenCloseItem: openCloseItem
+  }
+
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(DecoratedComponent)
+}

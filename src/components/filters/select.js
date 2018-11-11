@@ -17,10 +17,13 @@ class SelectFilter extends Component {
   }
 
   get optionsForSelect() {
-    return this.props.articles.map((item) => ({
-      value: item.id,
-      label: item.title
-    }))
+    return Object.keys(this.props.articles).map((key) => {
+      const article = this.props.articles[key]
+      return {
+        value: article.id,
+        label: article.title
+      }
+    })
   }
 
   handleSelectChange = (selectedOptions) => {
