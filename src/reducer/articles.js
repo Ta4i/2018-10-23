@@ -5,5 +5,6 @@ export default (articleState = normalizedArticles, action) => {
   if (action.type === DELETE_ARTICLE) {
     return articleState.filter((article) => article.id !== action.payload.id)
   }
+
   return articleState
 }
