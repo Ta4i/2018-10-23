@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { openCloseItem } from '../ac'
+import { openCloseItem, clearSubmittingComment } from '../ac'
 
 export default (OriginalComponent) => {
   class DecoratedComponent extends Component {
@@ -10,9 +10,14 @@ export default (OriginalComponent) => {
       return (
         <OriginalComponent
           {...this.props}
-          toggleOpenItem={this.props.handleOpenCloseItem}
+          toggleOpenItem={this.handleToggleOpenClose}
         />
       )
+    }
+
+    handleToggleOpenClose = (id) => {
+      this.props.openCloseItem(id)
+      this.props.clearSubmittingComment()
     }
   }
 
@@ -21,7 +26,8 @@ export default (OriginalComponent) => {
   })
 
   const mapDispatchToProps = {
-    handleOpenCloseItem: openCloseItem
+    openCloseItem: openCloseItem,
+    clearSubmittingComment: clearSubmittingComment
   }
 
   return connect(
