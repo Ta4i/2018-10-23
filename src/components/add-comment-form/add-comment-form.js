@@ -14,20 +14,18 @@ class AddCommentForm extends Component {
         <div>User:</div>
         <input value={this.state.user} onChange={this.handleUserInput} />
         <div>Text:</div>
+        <textarea
+          value={this.state.text}
+          onChange={this.handleTextInput}
+          multiple
+        />
         <div>
-          <textarea
-            value={this.state.text}
-            onChange={this.handleTextInput}
-            multiple
-          />
-          <div>
-            <button
-              onClick={this.handleClick}
-              disabled={!this.state.canAddComment}
-            >
-              Add
-            </button>
-          </div>
+          <button
+            onClick={this.handleClick}
+            disabled={!this.state.canAddComment}
+          >
+            Add
+          </button>
         </div>
       </form>
     )
