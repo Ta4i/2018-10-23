@@ -4,7 +4,7 @@ import {
   DELETE_ARTICLE
 } from '../constants'
 
-const defaultFilter = {
+export const defaultFilter = {
   selected: [],
   dateRange: {
     from: null,
