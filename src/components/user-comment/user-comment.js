@@ -68,7 +68,7 @@ class UserComment extends Component {
     evt.preventDefault()
 
     if (this.checkValidity()) {
-      this.props.addComment(this.state)
+      this.props.addComment(this.state, this.props.currentId)
       this.setState({
         user: '',
         text: ''
@@ -84,10 +84,15 @@ class UserComment extends Component {
     })
   }
 }
-
+/*
 export default connect(
   null,
   (dispatch, ownProps) => ({
     addComment: (comment) => dispatch(addComment(comment, ownProps.currentId))
   })
+)(UserComment)*/
+
+export default connect(
+  null,
+  { addComment }
 )(UserComment)
