@@ -20,7 +20,6 @@ export class ArticleList extends Component {
     this.props.fetchData && this.props.fetchData()
   }
   render() {
-    console.log('render articles-list')
     return <ul>{this.items}</ul>
   }
 
@@ -38,7 +37,6 @@ export class ArticleList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('connect articles-list')
   return {
     articles: filteredArticleSelector(state)
   }
