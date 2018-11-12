@@ -1,10 +1,21 @@
 import { normalizedComments } from '../fixtures'
+import { getObjFromArray } from '../helper/index'
+import { ADD_COMMENT } from '../constants/index'
 
-const defaultComment = normalizedComments.reduce((acc, comment) => {
-  acc[comment.id] = comment
-  return acc
-}, {})
+console.log(getObjFromArray(normalizedComments))
+export default (commentState = getObjFromArray(normalizedComments), action) => {
+  const { type, payload } = action
+  switch (type) {
+    case ADD_COMMENT: {
+      const newCommentsObj = Object.assign({}, commentState)
+      newCommentsObj[action.payload.id] = {
+        id: payload.id,
+        user: payload.author,
+        text: payload.text
+      }
+      return newCommentsObj
+    }
+  }
 
-export default (commentState = defaultComment, action) => {
   return commentState
 }
