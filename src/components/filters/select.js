@@ -28,10 +28,18 @@ class SelectFilter extends Component {
   }
 }
 
-export default connect(
-  (state) => ({
+const mapStateToProps = (state) => {
+  const articles = articlesSelector(state).map((id) => {
+    return state.articleObject[id]
+  })
+
+  return {
     selected: filtersSelector(state).selected,
-    articles: articlesSelector(state)
-  }),
+    articles: articles
+  }
+}
+
+export default connect(
+  mapStateToProps,
   { changeSelection }
 )(SelectFilter)
