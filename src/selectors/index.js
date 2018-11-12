@@ -21,7 +21,9 @@ export const filteredArticleSelector = createSelector(
     } = filters
     console.log('selector articles-list')
 
-    return articles.filter((article) => {
+    const articlesArray = Object.keys(articles).map((i) => articles[i])
+
+    return articlesArray.filter((article) => {
       const published = Date.parse(article.date)
 
       return (

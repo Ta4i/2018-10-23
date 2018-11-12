@@ -17,7 +17,10 @@ class SelectFilter extends Component {
   }
 
   get optionsForSelect() {
-    return this.props.articles.map((item) => ({
+    const { articles } = this.props
+    const articlesArray = Object.keys(articles).map((i) => articles[i])
+
+    return articlesArray.map((item) => ({
       value: item.id,
       label: item.title
     }))
