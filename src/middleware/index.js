@@ -8,8 +8,8 @@ export const logger = (store) => (next) => (action) => {
 }
 export const commentId = (store) => (next) => (action) => {
   if (action.type === ADD_COMMENT) {
-    action.payload.id = new Date().getTime()
-    console.log('Middleware', action.payload.id)
+    action.payload.comment.id = new Date().getTime().toString()
+    console.log('Middleware comment ID', action.payload.comment.id)
   }
   next(action)
 }

@@ -9,9 +9,9 @@ class CommentForm extends Component {
 
     this.state = {
       commentForm: {
-        name: '',
-        text: '',
-        articleId: this.props.articleId
+        id: null,
+        user: '',
+        text: ''
       }
     }
 
@@ -41,7 +41,7 @@ class CommentForm extends Component {
           Username:
           <input
             onChange={this.handleUserNameInput}
-            value={this.state.commentForm.name}
+            value={this.state.commentForm.user}
           />
           Comment text
           <input
@@ -60,7 +60,7 @@ class CommentForm extends Component {
 
   handleUserNameInput = (event) => {
     let commentForm = { ...this.state.commentForm }
-    commentForm.name = event.target.value
+    commentForm.user = event.target.value
     this.setState({ commentForm })
   }
 
@@ -72,7 +72,7 @@ class CommentForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.dispatchAddComment(this.state.commentForm)
+    this.props.dispatchAddComment(this.state.commentForm, this.props.articleId)
   }
 }
 

@@ -31,11 +31,13 @@ export function changeSelection(selected) {
   }
 }
 
-export function addComment(comment) {
-  console.log('addComment AC, comment', comment)
+export function addComment(comment, articleId) {
+  console.log('addComment AC, comment, articleId', comment, articleId)
   return {
     type: ADD_COMMENT,
-    payload: comment // = { name, text, articleId }
-    // payload: {comment} // = { comment: { name, text, id } }
+    payload: {
+      comment, // = {id, user, text }
+      articleId: articleId
+    }
   }
 }

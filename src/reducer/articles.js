@@ -15,16 +15,11 @@ export default (articleState = defaultArticle, action) => {
     console.log('Article Reducer, articleState', articleState)
     console.log('Article Reducer, action', action)
 
-    // let targetArticle = Object.values(articleState).filter(
-    //   (article) => article.id === action.payload.articleId
-    // )
-    // console.log('targetArticle', targetArticle)
-
     for (let key in articleState) {
       if (key === action.payload.articleId) {
-        console.log('ID found', key)
-        console.log('Target comment', articleState[key].comments)
-        articleState[key].comments.splice(0, action.payload.id)
+        console.log('Target comment found', articleState[key].comments)
+        console.log('Comment ID to be added: ', action.payload.comment.id)
+        articleState[key].comments.splice(2, action.payload.comment.id)
       }
     }
 
