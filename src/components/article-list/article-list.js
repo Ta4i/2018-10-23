@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { filteredArticleSelector } from '../../selectors'
-
 import Article from '../article'
 import accordion from '../../decorators/accordion'
 
@@ -10,7 +9,6 @@ export class ArticleList extends Component {
   static propTypes = {
     articles: PropTypes.array.isRequired,
     fetchData: PropTypes.func,
-
     //from accordion decorator
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired
@@ -40,7 +38,8 @@ export class ArticleList extends Component {
 const mapStateToProps = (state) => {
   console.log('connect articles-list')
   return {
-    articles: filteredArticleSelector(state)
+    articles: filteredArticleSelector(state),
+    addArticle: state.addArticle
   }
 }
 

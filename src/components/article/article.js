@@ -4,15 +4,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'
-import { deleteArticle } from '../../ac'
+import { deleteArticle, addComment } from '../../ac'
 
 class Article extends PureComponent {
   state = {
     error: null
   }
-  componentDidCatch(error) {
-    this.setState({ error })
-  }
+  //componentDidCatch(error) {
+  //  this.setState({ error })
+  //}
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
@@ -49,14 +49,15 @@ class Article extends PureComponent {
   }
 
   get body() {
-    const { isOpen, article } = this.props
+    const { isOpen, article, addComment } = this.props
+    const add = (id, user, text) => addComment(article.id, id, user, text)
 
     if (!isOpen) return null
-
+    //{this.state.error ? null : <CommentList comments={article.comments} />}
     return (
       <section className={'test--article__body'}>
         {article.text}
-        {this.state.error ? null : <CommentList comments={article.comments} />}
+        <CommentList comments={article.comments} addComment={add} />
       </section>
     )
   }
@@ -69,10 +70,14 @@ Article.propTypes = {
     comments: PropTypes.array
   }),
   isOpen: PropTypes.bool.isRequired,
-  toggleOpen: PropTypes.func.isRequired
+  toggleOpen: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired
 }
 
 export default connect(
   null,
-  { dispatchDeleteArticle: deleteArticle }
+  {
+    dispatchDeleteArticle: deleteArticle,
+    addComment
+  }
 )(Article)
