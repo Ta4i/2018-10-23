@@ -7,7 +7,6 @@ const defaultComment = normalizedComments.reduce((acc, comment) => {
 }, {})
 
 export default (commentState = defaultComment, action) => {
-  console.log('Reducer: commentState', commentState)
   if (action.type === ADD_COMMENT) {
     const commentEntry = {}
     commentEntry[action.payload.comment.id] = action.payload.comment

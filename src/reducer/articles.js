@@ -12,18 +12,11 @@ export default (articleState = defaultArticle, action) => {
       (article) => article.id !== action.payload.id
     )
   } else if (action.type === ADD_COMMENT) {
-    console.log('Article Reducer, articleState', articleState)
-    console.log('Article Reducer, action', action)
-
     for (let key in articleState) {
       if (key === action.payload.articleId) {
-        console.log('Target comment found', articleState[key].comments)
-        console.log('Comment ID to be added: ', action.payload.comment.id)
-        articleState[key].comments.splice(2, action.payload.comment.id)
+        articleState[key].comments.push(action.payload.comment.id)
       }
     }
-
-    console.log('Article Reducer, articleState AFTER', articleState)
   }
   return articleState
 }
