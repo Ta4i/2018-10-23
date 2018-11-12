@@ -8,9 +8,12 @@ const defaultArticles = normalizedArticles.reduce((acc, article) => {
 
 export default (articleState = defaultArticles, action) => {
   if (action.type === DELETE_ARTICLE) {
-    return Object.values(articleState).filter(
-      (article) => article.id !== action.payload.id
-    )
+    return Object.values(articleState).reduce((acc, article) => {
+      if (article.id !== action.payload.id) acc[article.id] = article
+
+      return acc
+    }, {})
   }
+
   return articleState
 }
