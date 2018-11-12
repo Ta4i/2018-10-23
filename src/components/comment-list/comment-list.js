@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import toggleOpenItem from '../../decorators/toggleOpen'
+import { UserCommentForm } from '../user-form'
 
 class CommentList extends Component {
   static propTypes = {
@@ -13,13 +14,17 @@ class CommentList extends Component {
   }
 
   render() {
-    const { isOpen, toggleOpenItem } = this.props
+    const { isOpen, toggleOpenItem, articleId } = this.props
+
     const text = isOpen ? 'hide comments' : 'show comments'
     return (
       <div>
         <button onClick={toggleOpenItem} className="test--comment-list__btn">
           {text}
         </button>
+
+        <UserCommentForm articleId={articleId} />
+
         <CSSTransition
           transitionName="comments"
           transitionEnterTimeout={500}

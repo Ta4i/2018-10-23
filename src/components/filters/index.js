@@ -6,7 +6,7 @@ class Filters extends Component {
   render() {
     return (
       <div>
-        <Select articles={this.props.articles} />
+        <Select />
         <DateRange />
       </div>
     )
