@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'
-import { deleteArticle } from '../../ac'
+import { deleteArticle, addComment } from '../../ac'
 
 class Article extends PureComponent {
   state = {
@@ -49,14 +49,16 @@ class Article extends PureComponent {
   }
 
   get body() {
-    const { isOpen, article } = this.props
+    const { isOpen, article, addComment } = this.props
+    const add = (id, user, text) => addComment(article.id, user, text)
 
     if (!isOpen) return null
-
     return (
       <section className={'test--article__body'}>
         {article.text}
-        {this.state.error ? null : <CommentList comments={article.comments} />}
+        {this.state.error ? null : (
+          <CommentList comments={article.comments} addComment={add} />
+        )}
       </section>
     )
   }
@@ -69,10 +71,14 @@ Article.propTypes = {
     comments: PropTypes.array
   }),
   isOpen: PropTypes.bool.isRequired,
-  toggleOpen: PropTypes.func.isRequired
+  toggleOpen: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired
 }
 
 export default connect(
   null,
-  { dispatchDeleteArticle: deleteArticle }
+  {
+    dispatchDeleteArticle: deleteArticle,
+    addComment
+  }
 )(Article)

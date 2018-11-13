@@ -1,0 +1,16 @@
+.addComment {
+   margin-top: 5px;
+}
+.addComment label {
+    width: 70px;
+    display: block;
+    float: left;
+}
+
+.addComment button {
+    margin-right: 5px;
+}
+
+.addComment .validation {
+    color: red;
+}
