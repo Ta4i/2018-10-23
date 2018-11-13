@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
+import CommentForm from '../comment-form'
 import toggleOpenItem from '../../decorators/toggleOpen'
 
 class CommentList extends Component {
@@ -40,6 +41,7 @@ class CommentList extends Component {
         ) : (
           <h3 className="test--comment-list__empty">No comments yet</h3>
         )}
+        <CommentForm articleId={this.props.articleId} />
       </div>
     )
   }
