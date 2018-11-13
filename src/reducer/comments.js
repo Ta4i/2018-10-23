@@ -8,7 +8,17 @@ const defaultComment = normalizedComments.reduce((acc, comment) => {
 
 export default (commentState = defaultComment, action) => {
   if (action.type === ADD_COMMENT) {
-    return commentState
+    let comment = action.payload,
+      commentId = comment.id
+
+    return Object.assign({}, commentState, {
+      ...commentState,
+      [commentId]: {
+        id: comment.id,
+        user: comment.user,
+        text: comment.text
+      }
+    })
   }
   return commentState
 }

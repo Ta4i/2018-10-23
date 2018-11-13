@@ -9,6 +9,8 @@ export const logger = (store) => (next) => (action) => {
 
 export const generateId = (store) => (next) => (action) => {
   if (action.type === ADD_COMMENT) {
+    console.log('add comment middleware')
+
     let chars = 'abcdefghijklmnopqrstuvwxyz0123456789',
       commentId = ''
 

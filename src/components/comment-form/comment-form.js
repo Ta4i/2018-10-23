@@ -9,7 +9,8 @@ class CommentForm extends Component {
 
     let comment = {
       user: e.target.commentName.value,
-      text: e.target.commentText.value
+      text: e.target.commentText.value,
+      articleId: this.props.articleId
     }
 
     this.props.dispatchAddComment(comment)
