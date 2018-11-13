@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addComment } from '../../ac'
 import './comment-form.css'
 
 class CommentForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    console.log('comment added')
+    let comment = {
+      user: e.target.commentName.value,
+      text: e.target.commentText.value
+    }
+
+    this.props.dispatchAddComment(comment)
   }
 
   render() {
@@ -49,4 +56,7 @@ class CommentForm extends Component {
   }
 }
 
-export default CommentForm
+export default connect(
+  null,
+  { dispatchAddComment: addComment }
+)(CommentForm)
