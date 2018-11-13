@@ -5,7 +5,10 @@ import {
   CHANGE_SELECTION,
   ADD_COMMENT,
   LOAD_ALL_ARTICLES,
-  LOAD_ARTICLE
+  LOAD_ARTICLE,
+  START,
+  SUCCESS,
+  FAIL
 } from '../constants'
 
 export function incrementActionCreator() {
@@ -48,10 +51,35 @@ export function loadAllArticles() {
   }
 }
 
+// export function loadArticle(id) {
+//   return {
+//     type: LOAD_ARTICLE,
+//     payload: { id },
+//     callAPI: `/api/article/${id}`
+//   }
+// }
+
 export function loadArticle(id) {
-  return {
-    type: LOAD_ARTICLE,
-    payload: { id },
-    callAPI: `/api/article/${id}`
+  return function(dispatch) {
+    dispatch({
+      type: LOAD_ARTICLE + START,
+      payload: { id }
+    })
+
+    fetch(`/api/article/${id}`)
+      .then((res) => res.json())
+      .then((responce) => {
+        dispatch({
+          payload: responce,
+          type: LOAD_ARTICLE + SUCCESS
+        })
+      })
+      .catch((e) =>
+        dispatch({
+          type: LOAD_ARTICLE + FAIL,
+          payload: { id },
+          error: e
+        })
+      )
   }
 }
