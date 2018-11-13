@@ -7,13 +7,7 @@ export default (state = arrToMap(normalizedComments), action) => {
 
   switch (type) {
     case ADD_COMMENT:
-      return {
-        ...state,
-        [randomId]: {
-          ...payload.comment,
-          id: randomId
-        }
-      }
+      return state.set(randomId, { ...payload, id: randomId })
 
     default:
       return state

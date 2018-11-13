@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "immutable": "^4.0.0-rc.12",
     "react": "^16.6.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-day-picker": "^7.2.4",
