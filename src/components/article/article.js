@@ -10,9 +10,9 @@ class Article extends PureComponent {
   state = {
     error: null
   }
-  //componentDidCatch(error) {
-  //  this.setState({ error })
-  //}
+  componentDidCatch(error) {
+    this.setState({ error })
+  }
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
