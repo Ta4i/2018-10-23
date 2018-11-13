@@ -5,7 +5,8 @@ export const commentId = (store) => (next) => (action) => {
     const id = Math.random()
       .toString(36)
       .substr(2, 16)
-    action.id = id
+    action.payload.id = id
+    console.log('commentId - ' + action.payload.id)
   }
   next(action)
 }
