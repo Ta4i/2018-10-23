@@ -2,13 +2,13 @@ import {
   DELETE_ARTICLE,
   ADD_COMMENT,
   LOAD_ALL_ARTICLES,
+  LOAD_ARTICLE,
   START,
   SUCCESS,
   FAIL
 } from '../constants'
-import { normalizedArticles as defaultArticles } from '../fixtures'
 import { arrToMap } from './utils'
-import { Map, fromJS, Record } from 'immutable'
+import { Record } from 'immutable'
 
 const ArticleRecord = Record({
   id: null,
@@ -49,6 +49,12 @@ export default (articles = new ReducerRecord(), action) => {
 
     case LOAD_ALL_ARTICLES + FAIL:
       return articles.set('error', action.error)
+
+    case LOAD_ARTICLE + SUCCESS:
+      return articles.setIn(
+        ['entities', payload.id],
+        new ArticleRecord(action.responce)
+      )
 
     default:
       return articles

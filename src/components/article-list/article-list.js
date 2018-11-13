@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   filteredArticleSelector,
-  articleLoadingSelector
+  articleLoadingSelector,
+  articleLoadedSelector
 } from '../../selectors'
 
 import Loader from '../common/loader'
@@ -22,7 +23,7 @@ export class ArticleList extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchData && this.props.fetchData()
+    !this.props.loaded && this.props.fetchData && this.props.fetchData()
   }
   render() {
     if (this.props.loading) return <Loader />
@@ -47,7 +48,8 @@ const mapStateToProps = (state) => {
   console.log('connect articles-list')
   return {
     articles: filteredArticleSelector(state),
-    loading: articleLoadingSelector(state)
+    loading: articleLoadingSelector(state),
+    loaded: articleLoadedSelector(state)
   }
 }
 

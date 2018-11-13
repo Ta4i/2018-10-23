@@ -7,6 +7,7 @@ export const articleListSelector = createSelector(
   (articlesMap) => articlesMap.valueSeq().toJS()
 )
 export const articleLoadingSelector = (state) => state.articles.loading
+export const articleLoadedSelector = (state) => state.articles.loaded
 export const commentsSelector = (state) => state.comments
 export const idSelector = (_, props) => props.id
 
