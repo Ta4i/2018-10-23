@@ -15,7 +15,8 @@ const ArticleRecord = Record({
   text: null,
   title: null,
   date: null,
-  comments: []
+  comments: [],
+  loading: false
 })
 
 const ReducerRecord = Record({
@@ -50,10 +51,13 @@ export default (articles = new ReducerRecord(), action) => {
     case LOAD_ALL_ARTICLES + FAIL:
       return articles.set('error', action.error)
 
+    case LOAD_ARTICLE + START:
+      return articles.setIn(['entities', payload.id, 'loading'], true)
+
     case LOAD_ARTICLE + SUCCESS:
       return articles.setIn(
         ['entities', payload.id],
-        new ArticleRecord(action.payload)
+        new ArticleRecord(action.payload).set('loading', false)
       )
 
     default:

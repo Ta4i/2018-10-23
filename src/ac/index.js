@@ -8,7 +8,8 @@ import {
   LOAD_ARTICLE,
   START,
   SUCCESS,
-  FAIL
+  FAIL,
+  LOAD_COMMENTS
 } from '../constants'
 
 export function incrementActionCreator() {
@@ -79,6 +80,29 @@ export function loadArticle(id) {
           type: LOAD_ARTICLE + FAIL,
           payload: { id },
           error: e
+        })
+      )
+  }
+}
+
+export function loadComments() {
+  return function(dispatch) {
+    dispatch({
+      type: LOAD_COMMENTS + START
+    })
+
+    fetch(`/api/comment`)
+      .then((res) => res.json())
+      .then((response) => {
+        dispatch({
+          payload: response.records,
+          type: LOAD_COMMENTS + SUCCESS
+        })
+      })
+      .catch((error) =>
+        dispatch({
+          type: LOAD_COMMENTS + FAIL,
+          payload: { error }
         })
       )
   }

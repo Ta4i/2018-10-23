@@ -59,6 +59,8 @@ class Article extends PureComponent {
 
     if (!isOpen) return null
 
+    if (article.loading) return <Loader />
+
     return (
       <section className={'test--article__body'}>
         {article.text}
