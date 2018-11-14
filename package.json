@@ -2,7 +2,9 @@
   "name": "react-2018-10-23",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
+    "immutable": "^4.0.0-rc.12",
     "react": "^16.6.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-day-picker": "^7.2.4",
@@ -11,16 +13,19 @@
     "react-scripts": "2.0.5",
     "react-select": "^2.1.1",
     "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"npm run api\"",
+    "api": "node simple_api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "prettier": "prettier --write \"**/*.js\"",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "concurrently": "^4.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "husky": "^1.0.0-rc.6",

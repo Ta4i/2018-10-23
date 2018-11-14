@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'
-import { deleteArticle } from '../../ac'
+import { deleteArticle, loadArticle } from '../../ac'
+import Loader from '../common/loader'
 
 class Article extends PureComponent {
   state = {
@@ -13,6 +14,11 @@ class Article extends PureComponent {
   componentDidCatch(error) {
     this.setState({ error })
   }
+  componentDidUpdate(oldProps) {
+    const { isOpen, loadArticle, article } = this.props
+    if (isOpen && !oldProps.isOpen) loadArticle(article.id)
+  }
+
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
@@ -56,7 +62,7 @@ class Article extends PureComponent {
     return (
       <section className={'test--article__body'}>
         {article.text}
-        {this.state.error ? null : <CommentList comments={article.comments} />}
+        {this.state.error ? null : <CommentList article={article} />}
       </section>
     )
   }
@@ -74,5 +80,8 @@ Article.propTypes = {
 
 export default connect(
   null,
-  { dispatchDeleteArticle: deleteArticle }
+  {
+    dispatchDeleteArticle: deleteArticle,
+    loadArticle
+  }
 )(Article)
