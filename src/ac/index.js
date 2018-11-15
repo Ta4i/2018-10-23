@@ -85,24 +85,33 @@ export function loadArticle(id) {
   }
 }
 
-export function loadComments() {
+export function loadComments(articleId) {
   return function(dispatch) {
     dispatch({
-      type: LOAD_COMMENTS + START
+      type: LOAD_COMMENTS + START,
+      payload: {
+        id: articleId
+      }
     })
 
-    fetch(`/api/comment`)
+    fetch(`/api/comment?article=${articleId}`)
       .then((res) => res.json())
       .then((response) => {
         dispatch({
-          payload: response.records,
+          payload: {
+            id: articleId,
+            entities: response
+          },
           type: LOAD_COMMENTS + SUCCESS
         })
       })
       .catch((error) =>
         dispatch({
           type: LOAD_COMMENTS + FAIL,
-          payload: { error }
+          payload: {
+            id: articleId,
+            error
+          }
         })
       )
   }

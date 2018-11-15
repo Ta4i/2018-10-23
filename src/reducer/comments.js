@@ -1,32 +1,16 @@
-import { ADD_COMMENT, LOAD_COMMENTS, FAIL, SUCCESS, START } from '../constants'
+import { ADD_COMMENT, LOAD_COMMENTS, SUCCESS } from '../constants'
 import { arrToMap } from './utils'
-import { fromJS } from 'immutable'
+import { Map } from 'immutable'
 
-const initialState = fromJS({
-  entities: {},
-  loading: false,
-  loaded: false,
-  error: null
-})
-
-export default (state = initialState, action) => {
+export default (state = new Map(), action) => {
   const { type, payload, randomId } = action
 
   switch (type) {
     case ADD_COMMENT:
       return state.set(randomId, { ...payload, id: randomId })
 
-    case LOAD_COMMENTS + START:
-      return state.set('loading', true)
-
-    case LOAD_COMMENTS + FAIL:
-      return state.set('error', action.payload.error).set('loading', false)
-
     case LOAD_COMMENTS + SUCCESS:
-      return state
-        .set('entities', arrToMap(payload))
-        .set('loaded', true)
-        .set('loading', false)
+      return state.merge(arrToMap(payload.entities))
 
     default:
       return state

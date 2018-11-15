@@ -7,11 +7,6 @@ import CommentForm from '../comment-form'
 import toggleOpenItem from '../../decorators/toggleOpen'
 import Loader from '../common/loader'
 import { loadComments } from '../../ac'
-import {
-  commentsLoadedSelector,
-  commentsLoadingSelector,
-  commentsErrorSelector
-} from '../../selectors'
 
 class CommentList extends Component {
   static propTypes = {
@@ -22,8 +17,11 @@ class CommentList extends Component {
   }
 
   fetchDataIfNeeded() {
-    const { loaded, isOpen, fetchData } = this.props
-    !loaded && isOpen && fetchData()
+    const { isOpen, fetchData, article } = this.props
+    isOpen &&
+      !article.commentsLoading &&
+      !article.commentsLoaded &&
+      fetchData(article.id)
   }
 
   componentDidMount() {
@@ -53,26 +51,20 @@ class CommentList extends Component {
     )
   }
   getBody() {
-    const {
-      article: { comments = [], id },
-      isOpen,
-      loading,
-      loaded,
-      error
-    } = this.props
-
-    if (error) return <strong>{error.message}</strong>
-    if (loading) return <Loader />
-    if (!isOpen || !loaded) return null
+    const { article, isOpen } = this.props
+    if (article.commentsLoadingError)
+      return <strong>{article.commentsLoadingError.message}</strong>
+    if (article.commentsLoading) return <Loader />
+    if (!isOpen || !article.commentsLoaded) return null
 
     return (
       <div className="test--comment-list__body">
-        {comments.length ? (
+        {article.comments.length ? (
           this.comments
         ) : (
           <h3 className="test--comment-list__empty">No comments yet</h3>
         )}
-        <CommentForm articleId={id} />
+        <CommentForm articleId={article.id} />
       </div>
     )
   }
@@ -89,19 +81,11 @@ class CommentList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loading: commentsLoadingSelector(state),
-    loaded: commentsLoadedSelector(state),
-    error: commentsErrorSelector(state)
-  }
-}
-
 const mapDispatchToProps = {
   fetchData: loadComments
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(toggleOpenItem(CommentList))

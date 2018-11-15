@@ -9,14 +9,11 @@ export const articleListSelector = createSelector(
 export const articleLoadingSelector = (state) => state.articles.loading
 export const articleLoadedSelector = (state) => state.articles.loaded
 export const commentsSelector = (state) => state.comments
-export const commentsLoadingSelector = (state) => state.comments.get('loading')
-export const commentsLoadedSelector = (state) => state.comments.get('loaded')
-export const commentsErrorSelector = (state) => state.comments.error
 export const idSelector = (_, props) => props.id
 
 export const createCommentSelector = () => {
   return createSelector(commentsSelector, idSelector, (comments, id) => {
-    return comments.get('entities').get(id)
+    return comments.get(id)
   })
 }
 
