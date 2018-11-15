@@ -6,11 +6,17 @@ import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'
 import { deleteArticle, loadArticle } from '../../ac'
 import Loader from '../common/loader'
+import {
+  articleLoadedSelector,
+  articleLoadingSelector,
+  filteredArticleSelector
+} from '../../selectors'
 
 class Article extends PureComponent {
   state = {
     error: null
   }
+
   componentDidCatch(error) {
     this.setState({ error })
   }
@@ -22,6 +28,16 @@ class Article extends PureComponent {
   render() {
     const { article, isOpen } = this.props
     const buttonTitle = isOpen ? 'close' : 'open'
+
+    // console.log('loading', this.props.article.textLoading);
+
+    if (article.textLoading)
+      return (
+        <div>
+          <h3>{article.title}</h3>
+          <Loader />
+        </div>
+      )
 
     return (
       <div>
