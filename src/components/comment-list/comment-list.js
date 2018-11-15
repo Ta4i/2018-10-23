@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
 import toggleOpenItem from '../../decorators/toggleOpen'
+import Loader from '../common/loader'
+import { loadComments } from '../../ac'
 
 class CommentList extends Component {
   static propTypes = {
@@ -11,6 +14,22 @@ class CommentList extends Component {
     //from toggleOpenItem decorator
     isOpen: PropTypes.bool,
     toggleOpenItem: PropTypes.func
+  }
+
+  fetchDataIfNeeded() {
+    const { isOpen, fetchData, article } = this.props
+    isOpen &&
+      !article.commentsLoading &&
+      !article.commentsLoaded &&
+      fetchData(article.id)
+  }
+
+  componentDidMount() {
+    this.fetchDataIfNeeded()
+  }
+
+  componentDidUpdate() {
+    this.fetchDataIfNeeded()
   }
 
   render() {
@@ -32,19 +51,20 @@ class CommentList extends Component {
     )
   }
   getBody() {
-    const {
-      article: { comments = [], id },
-      isOpen
-    } = this.props
-    if (!isOpen) return null
+    const { article, isOpen } = this.props
+    if (article.commentsLoadingError)
+      return <strong>{article.commentsLoadingError.message}</strong>
+    if (article.commentsLoading) return <Loader />
+    if (!isOpen || !article.commentsLoaded) return null
+
     return (
       <div className="test--comment-list__body">
-        {comments.length ? (
+        {article.comments.length ? (
           this.comments
         ) : (
           <h3 className="test--comment-list__empty">No comments yet</h3>
         )}
-        <CommentForm articleId={id} />
+        <CommentForm articleId={article.id} />
       </div>
     )
   }
@@ -60,4 +80,12 @@ class CommentList extends Component {
     )
   }
 }
-export default toggleOpenItem(CommentList)
+
+const mapDispatchToProps = {
+  fetchData: loadComments
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(toggleOpenItem(CommentList))

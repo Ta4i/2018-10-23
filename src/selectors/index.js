@@ -13,7 +13,7 @@ export const idSelector = (_, props) => props.id
 
 export const createCommentSelector = () => {
   return createSelector(commentsSelector, idSelector, (comments, id) => {
-    return comments.get('id')
+    return comments.get(id)
   })
 }
 
