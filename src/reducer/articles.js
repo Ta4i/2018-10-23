@@ -9,7 +9,7 @@ import {
   FAIL
 } from '../constants'
 import { arrToMap } from './utils'
-import { Record, fromJS } from 'immutable'
+import { Record } from 'immutable'
 
 const ArticleRecord = Record({
   id: null,
