@@ -2,18 +2,18 @@ import { createSelector } from 'reselect'
 
 export const filtersSelector = (state) => state.filters
 export const articlesMapSelector = (state) => state.articles.entities
+export const commentMapSelector = (state) => state.comments.entities
 export const articleListSelector = createSelector(
   articlesMapSelector,
   (articlesMap) => articlesMap.valueSeq().toJS()
 )
 export const articleLoadingSelector = (state) => state.articles.loading
 export const articleLoadedSelector = (state) => state.articles.loaded
-export const commentsSelector = (state) => state.comments
 export const idSelector = (_, props) => props.id
 
 export const createCommentSelector = () => {
-  return createSelector(commentsSelector, idSelector, (comments, id) => {
-    return comments.get('id')
+  return createSelector(commentMapSelector, idSelector, (comments, id) => {
+    return comments.get(id)
   })
 }
 
