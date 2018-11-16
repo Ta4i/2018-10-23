@@ -7,13 +7,18 @@ class ArticlesRoute extends Component {
   render() {
     return (
       <div>
+        <Route
+          path="/articles"
+          exact
+          render={() => <h2>Please select an Article</h2>}
+        />
         <ArticleList />
         <Route path="/articles/:id" render={this.getArticle} />
       </div>
     )
   }
   getArticle = ({ match }) => {
-    return <Article id={match.params.id} isOpen />
+    return <Article id={match.params.id} key={match.params.id} isOpen />
   }
 }
 

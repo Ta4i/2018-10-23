@@ -12,10 +12,12 @@ class Article extends PureComponent {
   state = {
     error: null
   }
+
   componentDidCatch(error) {
     this.setState({ error })
   }
-  componentDidUpdate() {
+
+  componentDidMount() {
     const { loadArticle, article, id } = this.props
 
     if (!article || (!article.text && !article.loading)) {
@@ -63,7 +65,6 @@ class Article extends PureComponent {
   get body() {
     const { isOpen, article } = this.props
 
-    if (!isOpen) return null
     if (article.loading) return <Loader key="loader" />
 
     return (
