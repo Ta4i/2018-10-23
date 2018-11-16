@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
 import toggleOpenItem from '../../decorators/toggleOpen'
+import { loadComments } from '../../ac'
+import Loader from '../common/loader'
 
 class CommentList extends Component {
   static propTypes = {
@@ -13,7 +16,15 @@ class CommentList extends Component {
     toggleOpenItem: PropTypes.func
   }
 
+  componentDidMount() {
+    !this.props.loaded &&
+      this.props.fetchData &&
+      this.props.fetchData(this.props.article.id)
+  }
+
   render() {
+    if (this.props.loading) return <Loader />
+
     const { isOpen, toggleOpenItem } = this.props
     const text = isOpen ? 'hide comments' : 'show comments'
     return (
@@ -60,4 +71,16 @@ class CommentList extends Component {
     )
   }
 }
-export default toggleOpenItem(CommentList)
+
+const mapStateToProps = (state) => ({
+  comments: state.comments.entities
+})
+
+const mapDispatchToProps = {
+  fetchData: loadComments
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(toggleOpenItem(CommentList))

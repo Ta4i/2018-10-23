@@ -31,4 +31,7 @@ const initMapStateToProps = () => {
   })
 }
 
-export default connect(initMapStateToProps)(Comment)
+export default connect(
+  initMapStateToProps,
+  null
+)(Comment)
