@@ -6,6 +6,7 @@ import {
   ADD_COMMENT,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
+  LOAD_COMMENTS,
   START,
   SUCCESS,
   FAIL
@@ -68,9 +69,9 @@ export function loadArticle(id) {
 
     fetch(`/api/article/${id}`)
       .then((res) => res.json())
-      .then((responce) => {
+      .then((response) => {
         dispatch({
-          payload: responce,
+          payload: response,
           type: LOAD_ARTICLE + SUCCESS
         })
       })
@@ -81,5 +82,19 @@ export function loadArticle(id) {
           error: e
         })
       )
+  }
+}
+
+export function loadComments(articleId) {
+  return function(dispatch) {
+    fetch(`/api/comment?article=${articleId}`)
+      .then((res) => res.json())
+      .then((response) => {
+        dispatch({
+          payload: response,
+          type: LOAD_COMMENTS + SUCCESS
+        })
+      })
+      .catch((e) => {})
   }
 }
