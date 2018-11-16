@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import ArticleList from './article-list'
 import UserForm from './user-form'
 import Filters from './filters'
 import Counter from './counter'
 import { Route, NavLink } from 'react-router-dom'
+import ArticlesRoute from '../routes/articles'
 
 export default class App extends Component {
   render() {
@@ -29,7 +29,7 @@ export default class App extends Component {
         </div>
         <Route path="/counter" component={Counter} />
         <Route path="/filters" component={Filters} />
-        <Route path="/articles" component={ArticleList} />
+        <Route path="/articles" component={ArticlesRoute} />
       </div>
     )
   }

@@ -37,3 +37,9 @@ export const filteredArticleSelector = createSelector(
     })
   }
 )
+
+export const articleSelector = createSelector(
+  articlesMapSelector,
+  idSelector,
+  (articles, id) => articles.get(id)
+)
