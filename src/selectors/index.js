@@ -8,12 +8,12 @@ export const articleListSelector = createSelector(
 )
 export const articleLoadingSelector = (state) => state.articles.loading
 export const articleLoadedSelector = (state) => state.articles.loaded
-export const commentsSelector = (state) => state.comments
+export const commentsSelector = (state) => state.comments.entities
 export const idSelector = (_, props) => props.id
 
 export const createCommentSelector = () => {
   return createSelector(commentsSelector, idSelector, (comments, id) => {
-    return comments.get('id')
+    return comments.get(id)
   })
 }
 
@@ -25,7 +25,6 @@ export const filteredArticleSelector = createSelector(
       selected,
       dateRange: { from, to }
     } = filters
-    console.log('selector articles-list')
 
     return articles.filter((article) => {
       const published = Date.parse(article.date)

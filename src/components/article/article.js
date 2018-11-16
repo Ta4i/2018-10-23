@@ -58,9 +58,10 @@ class Article extends PureComponent {
     const { isOpen, article } = this.props
 
     if (!isOpen) return null
+    if (article.loading) return <Loader key="loader" />
 
     return (
-      <section className={'test--article__body'}>
+      <section className={'test--article__body'} key="body">
         {article.text}
         {this.state.error ? null : <CommentList article={article} />}
       </section>
@@ -72,7 +73,8 @@ Article.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.string,
     text: PropTypes.string,
-    comments: PropTypes.array
+    comments: PropTypes.array,
+    loading: PropTypes.bool
   }),
   isOpen: PropTypes.bool.isRequired,
   toggleOpen: PropTypes.func.isRequired
