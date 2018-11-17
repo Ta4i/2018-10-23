@@ -6,8 +6,7 @@ import {
   LOAD_ARTICLE_COMMENTS,
   START,
   SUCCESS,
-  FAIL,
-  LOAD_ALL_COMMENTS
+  FAIL
 } from '../constants'
 import { arrToMap } from './utils'
 import { Record } from 'immutable'
@@ -57,9 +56,6 @@ export default (state = new ReducerRecord(), action) => {
 
     case LOAD_ARTICLE + START:
       return state.setIn(['entities', payload.id, 'loading'], true)
-
-    case LOAD_ARTICLE + START:
-      return articles.setIn(['entities', payload.id, 'textLoading'], true)
 
     case LOAD_ARTICLE + SUCCESS:
       return state.setIn(
