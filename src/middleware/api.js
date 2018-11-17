@@ -9,10 +9,10 @@ export default (store) => (next) => (action) => {
 
   fetch(callAPI)
     .then((res) => res.json())
-    .then((responce) => {
+    .then((response) => {
       next({
         ...rest,
-        responce,
+        response,
         type: action.type + SUCCESS
       })
     })
