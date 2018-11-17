@@ -9,7 +9,8 @@ import {
   LOAD_ARTICLE_COMMENTS,
   START,
   SUCCESS,
-  FAIL
+  FAIL,
+  LOAD_ALL_COMMENTS
 } from '../constants'
 
 export function incrementActionCreator() {

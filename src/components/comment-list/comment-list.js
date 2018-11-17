@@ -4,6 +4,7 @@ import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
 import toggleOpenItem from '../../decorators/toggleOpen'
+
 import { connect } from 'react-redux'
 import Loader from '../common/loader'
 import { loadArticleComments } from '../../ac'
@@ -32,6 +33,7 @@ class CommentList extends Component {
   render() {
     const { isOpen, toggleOpenItem } = this.props
     const text = isOpen ? 'hide comments' : 'show comments'
+
     return (
       <div>
         <button onClick={toggleOpenItem} className="test--comment-list__btn">
