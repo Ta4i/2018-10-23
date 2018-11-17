@@ -3,6 +3,7 @@ import {
   ADD_COMMENT,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
+  LOAD_ARTICLE_COMMENTS,
   START,
   SUCCESS,
   FAIL,
@@ -16,11 +17,10 @@ const ArticleRecord = Record({
   text: null,
   title: null,
   date: null,
-  comments: [],
-  textLoading: false,
-  textLoaded: false,
+  loading: false,
   commentsLoading: false,
-  commentsLoaded: false
+  commentsLoaded: false,
+  comments: []
 })
 
 const ReducerRecord = Record({
@@ -30,55 +30,55 @@ const ReducerRecord = Record({
   error: null
 })
 
-export default (articles = new ReducerRecord(), action) => {
+export default (state = new ReducerRecord(), action) => {
   const { type, payload, randomId } = action
 
   switch (type) {
     case DELETE_ARTICLE:
-      return articles.deleteIn(['entities', payload.id])
+      return state.deleteIn(['entities', payload.id])
 
     case ADD_COMMENT:
-      return articles.updateIn(
+      return state.updateIn(
         ['entities', payload.articleId, 'comments'],
         (comments) => comments.concat(randomId)
       )
 
     case LOAD_ALL_ARTICLES + START:
-      return articles.set('loading', true)
+      return state.set('loading', true)
 
     case LOAD_ALL_ARTICLES + SUCCESS:
-      return articles
+      return state
         .set('entities', arrToMap(action.response, ArticleRecord))
         .set('loading', false)
         .set('loaded', true)
 
     case LOAD_ALL_ARTICLES + FAIL:
-      return articles.set('error', action.error)
+      return state.set('error', action.error)
+
+    case LOAD_ARTICLE + START:
+      return state.setIn(['entities', payload.id, 'loading'], true)
 
     case LOAD_ARTICLE + START:
       return articles.setIn(['entities', payload.id, 'textLoading'], true)
 
     case LOAD_ARTICLE + SUCCESS:
-      return articles
-        .setIn(['entities', payload.id], new ArticleRecord(action.payload))
-        .setIn(['entities', payload.id, 'textLoading'], false)
-        .setIn(['entities', payload.id, 'textLoaded'], true)
+      return state.setIn(
+        ['entities', payload.id],
+        new ArticleRecord(action.payload)
+      )
 
-    case LOAD_ALL_COMMENTS + START:
-      return articles.setIn(
-        ['entities', payload.parentId, 'commentsLoading'],
+    case LOAD_ARTICLE_COMMENTS + START:
+      return state.setIn(
+        ['entities', payload.articleId, 'commentsLoading'],
         true
       )
 
-    case LOAD_ALL_COMMENTS + SUCCESS:
-      return articles
-        .setIn(['entities', payload.parentId, 'commentsLoading'], false)
-        .setIn(['entities', payload.parentId, 'commentsLoaded'], true)
-
-    case LOAD_ALL_COMMENTS + FAIL:
-      return articles.set('error', action.error)
+    case LOAD_ARTICLE_COMMENTS + SUCCESS:
+      return state
+        .setIn(['entities', payload.articleId, 'commentsLoading'], false)
+        .setIn(['entities', payload.articleId, 'commentsLoaded'], true)
 
     default:
-      return articles
+      return state
   }
 }
