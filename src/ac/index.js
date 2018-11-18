@@ -85,3 +85,26 @@ export function loadArticle(id) {
       )
   }
 }
+
+export function loadAllComments() {
+  return function(dispatch) {
+    dispatch({
+      type: LOAD_ALL_COMMENTS + START
+    })
+
+    fetch(`/api/comment`)
+      .then((res) => res.json())
+      .then((response) => {
+        dispatch({
+          payload: response,
+          type: LOAD_ALL_COMMENTS + SUCCESS
+        })
+      })
+      .catch((e) =>
+        dispatch({
+          type: LOAD_ALL_COMMENTS + FAIL,
+          error: e
+        })
+      )
+  }
+}
