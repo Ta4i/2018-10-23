@@ -9,7 +9,8 @@ import {
   LOAD_ARTICLE_COMMENTS,
   START,
   SUCCESS,
-  FAIL
+  FAIL,
+  LOAD_COMMENTS_PAGE
 } from '../constants'
 
 export function incrementActionCreator() {
@@ -79,6 +80,36 @@ export function loadArticle(id) {
         dispatch({
           type: LOAD_ARTICLE + FAIL,
           payload: { id },
+          error: e
+        })
+      )
+  }
+}
+
+export function loadComments(page) {
+  return function(dispatch, getState) {
+    const limit = getState().pagedComments.commentsPerPage
+    const offset = (page - 1) * limit
+
+    dispatch({
+      type: LOAD_COMMENTS_PAGE + START,
+      payload: page
+    })
+
+    fetch(`/api/comment?limit=${limit}&offset=${offset}`)
+      .then((res) => res.json())
+      .then((response) => {
+        dispatch({
+          payload: {
+            page,
+            response
+          },
+          type: LOAD_COMMENTS_PAGE + SUCCESS
+        })
+      })
+      .catch((e) =>
+        dispatch({
+          type: LOAD_COMMENTS_PAGE + FAIL,
           error: e
         })
       )
