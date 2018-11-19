@@ -13,7 +13,7 @@ import {
   commentsPerPageSelector
 } from '../../selectors'
 
-class AllComments extends Component {
+class PagedComments extends Component {
   static propTypes = {
     page: PropTypes.number.isRequired
   }
@@ -97,4 +97,4 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(
   mapStateToProps,
   { loadComments }
-)(toggleOpenItem(AllComments))
+)(toggleOpenItem(PagedComments))
