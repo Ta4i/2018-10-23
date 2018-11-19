@@ -35,10 +35,11 @@ class AllCommentsList extends Component {
         ? this.props.total / COMMENTS_PER_PAGE
         : this.props.total / COMMENTS_PER_PAGE + 1
 
-    if (match.params.page > PAGES_TOTAL)
+    if (match.params.page > PAGES_TOTAL && !this.props.loading) {
       return <p>{`This page doesn't exist`}</p>
-
-    return <ul>{this.getItems(match.params.page)}</ul>
+    } else {
+      return <ul>{this.getItems(match.params.page)}</ul>
+    }
   }
 
   getItems(activePage = 1) {
