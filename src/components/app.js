@@ -38,7 +38,7 @@ export default class App extends Component {
           <Route path="/filters" component={Filters} />
           <Route path="/articles/new" render={() => <h2>New Article</h2>} />
           <Route path="/articles" component={ArticlesRoute} />
-          <Route path="/comments" exact component={AllCommentsList} />
+          <Route path="/comments" component={AllCommentsList} />
         </Switch>
       </div>
     )

@@ -10,7 +10,8 @@ import {
   START,
   SUCCESS,
   FAIL,
-  LOAD_ALL_COMMENTS
+  LOAD_ALL_COMMENTS,
+  CHANGE_PAGE
 } from '../constants'
 
 export function incrementActionCreator() {

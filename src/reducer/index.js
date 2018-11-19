@@ -10,5 +10,5 @@ export default combineReducers({
   articles: articlesReducer,
   filters: filtersReducer,
   comments: commentsReducer,
-  allComments: allCommentsReducer
+  allCommentsRecord: allCommentsReducer
 })
