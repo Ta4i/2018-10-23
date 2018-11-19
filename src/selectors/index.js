@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import { List } from 'immutable'
 
 export const filtersSelector = (state) => state.filters
 export const articlesMapSelector = (state) => state.articles.entities
@@ -43,3 +44,20 @@ export const articleSelector = createSelector(
   idSelector,
   (articles, id) => articles.get(id)
 )
+
+export const commentsPageSelector = (state, page) => {
+  const pages = state.pagedComments.pages
+  return pages.has(page) ? pages.get(page) : new List()
+}
+
+export const commentsPageLoadedSelector = (state, page) =>
+  state.pagedComments.pages.has(page)
+
+export const commentsPageLoadingSelector = (state) =>
+  state.pagedComments.loading
+
+export const totalCommentCountSelector = (state) =>
+  state.pagedComments.totalCommentCount
+
+export const commentsPerPageSelector = (state) =>
+  state.pagedComments.commentsPerPage
