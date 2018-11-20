@@ -1,0 +1,10 @@
+ul.navs {
+    display: inline-block; 
+    margin: 0;
+    padding: 0;
+}
+
+.navs li, .navs span {
+    display: inline-block; 
+    padding-right: 0.2em;
+}
