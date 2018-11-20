@@ -8,7 +8,6 @@ import {
 } from '../../selectors'
 
 import Loader from '../common/loader'
-import Article from '../article'
 import accordion from '../../decorators/accordion'
 import { loadAllArticles } from '../../ac'
 import { NavLink } from 'react-router-dom'

@@ -26,17 +26,13 @@ class Article extends PureComponent {
   }
 
   render() {
-    const { article, isOpen } = this.props
-    const buttonTitle = isOpen ? 'close' : 'open'
+    const { article } = this.props
 
     if (!article) return null
 
     return (
       <div>
         <h3>{article.title}</h3>
-        <button onClick={this.handleClick} className={'test--article__btn'}>
-          {buttonTitle}
-        </button>
         <button
           onClick={this.handleDelete}
           className={'test--article-delete__btn'}
@@ -54,16 +50,12 @@ class Article extends PureComponent {
     )
   }
 
-  handleClick = () => {
-    this.props.toggleOpen(this.props.article.id)
-  }
-
   handleDelete = () => {
     this.props.dispatchDeleteArticle(this.props.article.id)
   }
 
   get body() {
-    const { isOpen, article } = this.props
+    const { article } = this.props
 
     if (article.loading) return <Loader key="loader" />
 
