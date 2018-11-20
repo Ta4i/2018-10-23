@@ -9,7 +9,10 @@ import {
   LOAD_ARTICLE_COMMENTS,
   START,
   SUCCESS,
-  FAIL
+  FAIL,
+  LOAD_COMMENT_PAGE,
+  COMMENTS_ON_PAGE,
+  COMMENTS_COUNT
 } from '../constants'
 
 export function incrementActionCreator() {
@@ -82,5 +85,14 @@ export function loadArticle(id) {
           error: e
         })
       )
+  }
+}
+
+export function loadCommentPage(num) {
+  let offset = COMMENTS_ON_PAGE * num
+  return {
+    type: LOAD_COMMENT_PAGE,
+    payload: { num },
+    callAPI: `/api/comment?limit=${COMMENTS_ON_PAGE}&offset=${offset}`
   }
 }

@@ -19,3 +19,9 @@ export const START = '_START'
 export const SUCCESS = '_SUCCESS'
 
 export const FAIL = '_FAIL'
+
+export const LOAD_COMMENT_PAGE = 'LOAD_COMMENT_PAGE'
+
+export const COMMENTS_ON_PAGE = 5
+
+export const COMMENTS_COUNT = 16

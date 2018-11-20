@@ -43,3 +43,21 @@ export const articleSelector = createSelector(
   idSelector,
   (articles, id) => articles.get(id)
 )
+
+export const commentPageCommentsSelector = (state, ownProps) => {
+  let page = state.commentPage.entities.get(ownProps.num)
+  if (page && !page.loading && page.loaded) return page.comments
+  return null
+}
+
+export const commentPageLoadingSelector = (state, ownProps) => {
+  let page = state.commentPage.entities.get(ownProps.num)
+  if (page) return page.loading
+  return false
+}
+
+export const commentPageLoadedSelector = (state, ownProps) => {
+  let page = state.commentPage.entities.get(ownProps.num)
+  if (page) return page.loaded
+  return false
+}
