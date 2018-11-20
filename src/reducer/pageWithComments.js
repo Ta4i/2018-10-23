@@ -11,7 +11,7 @@ const ReducerRecord = Record({
   pages: new OrderedMap({}),
   loading: false,
   loaded: false,
-  totalPages: 0
+  totalCount: 0
 })
 
 export default (state = new ReducerRecord(), action) => {
@@ -33,10 +33,6 @@ export default (state = new ReducerRecord(), action) => {
       }
       return newState
     case LOAD_PAGED_COMMENTS + SUCCESS:
-      const pageSize = 5
-      const pages =
-        Math.floor(payload.total / pageSize) +
-        (payload.total % pageSize != 0 ? 1 : 0)
       const pageNumber = parseInt(payload.page)
       const record = new PageWithCommentsRecord({
         number: pageNumber,
@@ -45,7 +41,7 @@ export default (state = new ReducerRecord(), action) => {
       })
       return state
         .set('loading', false)
-        .set('totalPages', pages)
+        .set('totalCount', payload.total)
         .set('loaded', true)
         .setIn(['pages', pageNumber], record)
     default:
