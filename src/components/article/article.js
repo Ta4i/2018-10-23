@@ -63,7 +63,7 @@ class Article extends PureComponent {
   }
 
   get body() {
-    const { isOpen, article } = this.props
+    const { article } = this.props
 
     if (article.loading) return <Loader key="loader" />
 

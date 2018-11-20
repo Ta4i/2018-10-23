@@ -7,6 +7,7 @@ import {
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
   LOAD_ARTICLE_COMMENTS,
+  LOAD_PAGED_COMMENTS,
   START,
   SUCCESS,
   FAIL
@@ -57,6 +58,33 @@ export function loadArticleComments(articleId) {
     type: LOAD_ARTICLE_COMMENTS,
     payload: { articleId },
     callAPI: `/api/comment?article=${articleId}`
+  }
+}
+
+export function loadCommentsInPage(pageNumber) {
+  return function(dispatch) {
+    dispatch({
+      type: LOAD_PAGED_COMMENTS + START,
+      payload: { page: pageNumber }
+    })
+    const pageInteger = parseInt(pageNumber)
+    const pageSize = 5
+    const offset = (pageInteger - 1) * pageSize
+    fetch(`/api/comment?limit=${pageSize}&offset=${offset}`)
+      .then((res) => res.json())
+      .then((response) => {
+        dispatch({
+          payload: { ...response, page: pageNumber },
+          type: LOAD_PAGED_COMMENTS + SUCCESS
+        })
+      })
+      .catch((e) =>
+        dispatch({
+          type: LOAD_PAGED_COMMENTS + FAIL,
+          payload: { page: pageNumber },
+          error: e
+        })
+      )
   }
 }
 
