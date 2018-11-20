@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import UserForm from './user-form'
 import Filters from './filters'
 import Counter from './counter'
-import { Route, NavLink, Switch } from 'react-router-dom'
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
 import ArticlesRoute from '../routes/articles'
 import CommentsPage from '../routes/comments-page'
 
@@ -35,7 +35,8 @@ export default class App extends Component {
         </div>
 
         <Switch>
-          <Route path="/counter" exact component={Counter} />
+          <Redirect from={'/'} to={'/articles'} exact />
+          <Route path="/counter" exact component={Counter} strict />
           <Route path="/filters" component={Filters} />
           <Route path="/articles/new" render={() => <h2>New Article</h2>} />
           <Route path="/articles" component={ArticlesRoute} />

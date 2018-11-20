@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import Comment from '../comment'
 import Loader from '../common/loader'
 import { checkAndLoadCommentsForPage } from '../../ac'
@@ -21,8 +21,10 @@ class CommentsPagination extends Component {
   }
 
   render() {
-    const { total } = this.props
+    const { total, page } = this.props
     if (!total) return <Loader />
+    if (page > total / 5)
+      return <Redirect to={`/comments/${Math.floor(total / 5) + 1}`} />
     return (
       <div>
         {this.getCommentItems()}
