@@ -12,6 +12,7 @@ import {
   SUCCESS,
   FAIL
 } from '../constants'
+import { replace } from 'connected-react-router'
 
 export function incrementActionCreator() {
   return { type: INCREMENT }
@@ -69,20 +70,26 @@ export function loadArticle(id) {
     })
 
     fetch(`/api/article/${id}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 400) {
+          throw new Error(res.statusText)
+        }
+        return res.json()
+      })
       .then((response) => {
         dispatch({
           payload: response,
           type: LOAD_ARTICLE + SUCCESS
         })
       })
-      .catch((e) =>
+      .catch((e) => {
+        dispatch(replace('/error'))
         dispatch({
           type: LOAD_ARTICLE + FAIL,
           payload: { id },
           error: e
         })
-      )
+      })
   }
 }
 
