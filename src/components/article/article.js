@@ -8,6 +8,16 @@ import { deleteArticle, loadArticle } from '../../ac'
 import { articleSelector } from '../../selectors'
 import Loader from '../common/loader'
 
+const lang = 'en'
+
+const textsRu = {
+  DELETE_ME: 'Удалить'
+}
+
+const textsEn = {
+  DELETE_ME: 'Delete'
+}
+
 class Article extends PureComponent {
   state = {
     error: null
@@ -37,7 +47,7 @@ class Article extends PureComponent {
           onClick={this.handleDelete}
           className={'test--article-delete__btn'}
         >
-          Delete me
+          {lang === 'ru' ? textsRu.DELETE_ME : textsEn.DELETE_ME}
         </button>
         <CSSTransition
           transitionName="article"
