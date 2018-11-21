@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import MenuItem from './menu-item'
+import InterComment from '../../contexts/inter'
 
 class Menu extends Component {
   render() {
     return (
-      <div>
-        <h2>Main menu</h2>
-        {this.props.children}
-      </div>
+      <InterComment.Consumer>
+        {({ mainMenu }) => (
+          <div>
+            <h2>{mainMenu}</h2>
+            {this.props.children}
+          </div>
+        )}
+      </InterComment.Consumer>
     )
   }
 }

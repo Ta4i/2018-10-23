@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import Loader from '../common/loader'
 import { loadArticleComments } from '../../ac'
 import { Consumer as AuthConsumer } from '../../contexts/auth'
+import InterContext from '../../contexts/inter'
 
 class CommentList extends Component {
   static propTypes = {
@@ -32,20 +33,26 @@ class CommentList extends Component {
 
   render() {
     const { isOpen, toggleOpenItem } = this.props
-    const text = isOpen ? 'hide comments' : 'show comments'
     return (
-      <div>
-        <button onClick={toggleOpenItem} className="test--comment-list__btn">
-          {text}
-        </button>
-        <CSSTransition
-          transitionName="comments"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-        >
-          {this.getBody()}
-        </CSSTransition>
-      </div>
+      <InterContext.Consumer>
+        {({ showComments, hideComments }) => (
+          <div>
+            <button
+              onClick={toggleOpenItem}
+              className="test--comment-list__btn"
+            >
+              {isOpen ? hideComments : showComments}
+            </button>
+            <CSSTransition
+              transitionName="comments"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={500}
+            >
+              {this.getBody()}
+            </CSSTransition>
+          </div>
+        )}
+      </InterContext.Consumer>
     )
   }
 

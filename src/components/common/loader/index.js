@@ -1,7 +1,12 @@
 import React from 'react'
+import InterContext from '../../../contexts/inter'
 
 function Loader(props) {
-  return <h3>Loading...</h3>
+  return (
+    <InterContext.Consumer>
+      {({ loading }) => <h3>{loading}</h3>}
+    </InterContext.Consumer>
+  )
 }
 
 export default Loader
