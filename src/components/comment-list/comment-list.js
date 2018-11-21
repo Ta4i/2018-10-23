@@ -8,6 +8,7 @@ import toggleOpenItem from '../../decorators/toggleOpen'
 import { connect } from 'react-redux'
 import Loader from '../common/loader'
 import { loadArticleComments } from '../../ac'
+import { Consumer as AuthConsumer } from '../../contexts/auth'
 
 class CommentList extends Component {
   static propTypes = {
@@ -62,6 +63,9 @@ class CommentList extends Component {
 
     return (
       <div className="test--comment-list__body">
+        <AuthConsumer>
+          {(value) => <h2>{value.userNameFromContext}</h2>}
+        </AuthConsumer>
         {comments.length ? (
           this.comments
         ) : (
