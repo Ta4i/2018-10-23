@@ -7,6 +7,7 @@ import './style.css'
 import { deleteArticle, loadArticle } from '../../ac'
 import { articleSelector } from '../../selectors'
 import Loader from '../common/loader'
+import TranslatedString from '../translated-string'
 
 class Article extends PureComponent {
   state = {
@@ -37,7 +38,7 @@ class Article extends PureComponent {
           onClick={this.handleDelete}
           className={'test--article-delete__btn'}
         >
-          Delete me
+          <TranslatedString name="delete" />
         </button>
         <CSSTransition
           transitionName="article"

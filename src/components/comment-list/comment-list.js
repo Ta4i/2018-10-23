@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import Loader from '../common/loader'
 import { loadArticleComments } from '../../ac'
 import { Consumer as AuthConsumer } from '../../contexts/auth'
+import TranslatedString from '../translated-string'
 
 class CommentList extends Component {
   static propTypes = {
@@ -32,7 +33,11 @@ class CommentList extends Component {
 
   render() {
     const { isOpen, toggleOpenItem } = this.props
-    const text = isOpen ? 'hide comments' : 'show comments'
+    const text = isOpen ? (
+      <TranslatedString name="hideComments" />
+    ) : (
+      <TranslatedString name="showComments" />
+    )
     return (
       <div>
         <button onClick={toggleOpenItem} className="test--comment-list__btn">
