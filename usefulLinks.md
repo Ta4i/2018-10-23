@@ -13,11 +13,15 @@
 - https://reactjs.org/docs/animation.html Анимации в React
 - https://cdn-images-1.medium.com/max/1600/1*CBfav7WP_SuV_UV87N1_Og.png Redux flow
 - https://designingforscale.com/content/images/2017/09/reduxMiddleware.png диаграмма Redux flow с Middleware
+- https://reacttraining.com/react-router/web/api/Redirect
+- https://reacttraining.com/react-router/web/api/history
+- https://reactjs.org/docs/context.html
 
 ### Библиотеки, фреймворки:
 - https://redux.js.org/
 - https://react-redux.js.org/
 - https://reacttraining.com/react-router/web/guides/quick-start
+- https://github.com/supasate/connected-react-router подключение роутера к стору
 - https://github.com/reduxjs/reselect
 - https://facebook.github.io/immutable-js/
 - https://github.com/reduxjs/redux-thunk
