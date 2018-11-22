@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import MenuItem from './menu-item'
+import { Consumer as LangConsumer } from '../../contexts/lang'
 
 class Menu extends Component {
   render() {
     return (
       <div>
-        <h2>Main menu</h2>
+        <LangConsumer>{(value) => <h2>{value.mainMenuName}</h2>}</LangConsumer>
         {this.props.children}
       </div>
     )

@@ -10,7 +10,8 @@ import {
   LOAD_COMMENTS_FOR_PAGE,
   START,
   SUCCESS,
-  FAIL
+  FAIL,
+  LOAD_ALL_COMMENTS
 } from '../constants'
 import { replace } from 'connected-react-router'
 
