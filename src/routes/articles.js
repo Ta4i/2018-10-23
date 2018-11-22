@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ArticleList from '../components/article-list'
 import Article from '../components/article'
 import { Route } from 'react-router-dom'
+import { Consumer as LangConsumer } from '../contexts/lang'
 
 class ArticlesRoute extends Component {
   render() {
@@ -17,7 +18,11 @@ class ArticlesRoute extends Component {
       <Route
         path="/articles"
         exact
-        render={() => <h2>Please select an Article</h2>}
+        render={() => (
+          <LangConsumer>
+            {(value) => <h2>{value.articleChoose}</h2>}
+          </LangConsumer>
+        )}
       />
     ) : (
       <Article id={match.params.id} key={match.params.id} isOpen />

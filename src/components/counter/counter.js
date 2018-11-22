@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { incrementActionCreator } from '../../ac'
+import { Consumer as LangConsumer } from '../../contexts/lang'
 
 class Counter extends Component {
   render() {
@@ -8,7 +9,9 @@ class Counter extends Component {
     return (
       <div>
         <h1>{this.props.countProp}</h1>
-        <button onClick={this.handleClick}>Increase</button>
+        <button onClick={this.handleClick}>
+          <LangConsumer>{(value) => value.countInc}</LangConsumer>
+        </button>
       </div>
     )
   }

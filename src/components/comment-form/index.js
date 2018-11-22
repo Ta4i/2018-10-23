@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addComment } from '../../ac'
 import './style.css'
+import { Consumer as LangConsumer } from '../../contexts/lang'
 
 class CommentForm extends Component {
   static propTypes = {}
@@ -14,19 +15,21 @@ class CommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        user:{' '}
+        <LangConsumer>{(value) => value.userCommentName}</LangConsumer>{' '}
         <input
           value={this.state.user}
           onChange={this.handleChange('user')}
           className={this.getClassName('user')}
         />
-        comment:{' '}
+        <LangConsumer>{(value) => value.userComment}</LangConsumer>{' '}
         <input
           value={this.state.text}
           onChange={this.handleChange('text')}
           className={this.getClassName('text')}
         />
-        <input type="submit" value="submit" disabled={!this.isValidForm()} />
+        <button type="submit" value="submit" disabled={!this.isValidForm()}>
+          {<LangConsumer>{(value) => value.sendComment}</LangConsumer>}
+        </button>
       </form>
     )
   }

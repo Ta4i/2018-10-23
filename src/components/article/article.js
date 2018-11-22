@@ -7,16 +7,7 @@ import './style.css'
 import { deleteArticle, loadArticle } from '../../ac'
 import { articleSelector } from '../../selectors'
 import Loader from '../common/loader'
-
-const lang = 'en'
-
-const textsRu = {
-  DELETE_ME: 'Удалить'
-}
-
-const textsEn = {
-  DELETE_ME: 'Delete'
-}
+import { Consumer as LangConsumer } from '../../contexts/lang'
 
 class Article extends PureComponent {
   state = {
@@ -28,6 +19,14 @@ class Article extends PureComponent {
   }
 
   componentDidMount() {
+    const { loadArticle, article, id } = this.props
+
+    if (!article || (!article.text && !article.loading)) {
+      loadArticle(id)
+    }
+  }
+
+  componentDidUpdate() {
     const { loadArticle, article, id } = this.props
 
     if (!article || (!article.text && !article.loading)) {
@@ -47,7 +46,7 @@ class Article extends PureComponent {
           onClick={this.handleDelete}
           className={'test--article-delete__btn'}
         >
-          {lang === 'ru' ? textsRu.DELETE_ME : textsEn.DELETE_ME}
+          <LangConsumer>{(value) => value.delete}</LangConsumer>
         </button>
         <CSSTransition
           transitionName="article"
