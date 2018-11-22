@@ -18,7 +18,11 @@ export const inter = {
     selectArticle: 'Please select an article',
     loading: 'Loading...',
     user: 'User',
-    comment: 'Comment'
+    comment: 'Comment',
+    lang: 'Language',
+    selectLanguage: 'Please select your language',
+    english: 'English',
+    russian: 'Russian'
   },
   ru: {
     deleteArticle: 'Удалить статью',
@@ -37,7 +41,11 @@ export const inter = {
     selectArticle: 'Пожалуйста, выберите статью',
     loading: 'Загружаю...',
     user: 'Пользователь',
-    comment: 'Комментарий'
+    comment: 'Комментарий',
+    lang: 'Язык',
+    selectLanguage: 'Пожалуйста, выберите Ваш язык',
+    english: 'Английский',
+    russian: 'Русский'
   }
 }
 

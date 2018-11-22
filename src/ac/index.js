@@ -10,7 +10,8 @@ import {
   LOAD_COMMENTS_FOR_PAGE,
   START,
   SUCCESS,
-  FAIL
+  FAIL,
+  SET_LANGUAGE
 } from '../constants'
 import { replace } from 'connected-react-router'
 
@@ -105,5 +106,12 @@ export function checkAndLoadCommentsForPage(page) {
       payload: { page },
       callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
     })
+  }
+}
+
+export function setLanguange(lang) {
+  return {
+    type: SET_LANGUAGE,
+    payload: lang
   }
 }

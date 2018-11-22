@@ -8,26 +8,39 @@ import CommentsPage from '../routes/comments-page'
 import Menu, { MenuItem } from './menu'
 import { Provider as AuthProvider } from '../contexts/auth'
 import InterContext, { inter } from '../contexts/inter'
+import LangSelector from './lang-selector'
+import store from '../store'
 
-export default class App extends Component {
+class App extends Component {
   state = {
-    userName: ''
+    userName: '',
+    language: 'en'
   }
+
+  componentDidMount() {
+    this.updateLang()
+    store.subscribe(() => {
+      this.updateLang()
+    })
+  }
+
+  updateLang = () => this.setState({ language: store.getState().language })
 
   handleUserChange = (userName) => this.setState({ userName })
 
   render() {
     return (
-      <InterContext.Provider value={inter.ru}>
+      <InterContext.Provider value={inter[this.state.language]}>
         <AuthProvider value={{ userNameFromContext: this.state.userName }}>
           <InterContext.Consumer>
-            {({ counter, filters, articles, comments }) => (
+            {({ counter, filters, articles, comments, lang }) => (
               <div>
                 <UserForm
                   onChange={this.handleUserChange}
                   value={this.state.userName}
                 />
                 <Menu>
+                  <MenuItem to="/language">{lang}</MenuItem>
                   <MenuItem to="/counter">{counter}</MenuItem>
                   <MenuItem to="/filters">{filters}</MenuItem>
                   <MenuItem to="/articles">{articles}</MenuItem>
@@ -36,6 +49,7 @@ export default class App extends Component {
 
                 <Switch>
                   <Redirect from={'/'} to={'/articles'} exact />
+                  <Route path="/language" exact component={LangSelector} />
                   <Route path="/counter" exact component={Counter} strict />
                   <Route path="/filters" component={Filters} />
                   <Route
@@ -54,3 +68,11 @@ export default class App extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    language: state.language
+  }
+}
+
+export default App
