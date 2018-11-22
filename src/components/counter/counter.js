@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { incrementActionCreator } from '../../ac'
+import InterContext from '../../contexts/inter'
 
 class Counter extends Component {
   render() {
     console.log('Counter')
     return (
-      <div>
-        <h1>{this.props.countProp}</h1>
-        <button onClick={this.handleClick}>Increase</button>
-      </div>
+      <InterContext.Consumer>
+        {({ increase }) => (
+          <div>
+            <h1>{this.props.countProp}</h1>
+            <button onClick={this.handleClick}>{increase}</button>
+          </div>
+        )}
+      </InterContext.Consumer>
     )
   }
   handleClick = () => {

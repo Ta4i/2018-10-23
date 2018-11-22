@@ -7,16 +7,7 @@ import './style.css'
 import { deleteArticle, loadArticle } from '../../ac'
 import { articleSelector } from '../../selectors'
 import Loader from '../common/loader'
-
-const lang = 'en'
-
-const textsRu = {
-  DELETE_ME: 'Удалить'
-}
-
-const textsEn = {
-  DELETE_ME: 'Delete'
-}
+import InterContext from '../../contexts/inter'
 
 class Article extends PureComponent {
   state = {
@@ -28,9 +19,17 @@ class Article extends PureComponent {
   }
 
   componentDidMount() {
-    const { loadArticle, article, id } = this.props
+    this.loadArticleIfRequired()
+  }
 
-    if (!article || (!article.text && !article.loading)) {
+  componentDidUpdate() {
+    this.loadArticleIfRequired()
+  }
+
+  loadArticleIfRequired() {
+    const { articlesLoaded, loadArticle, article, id } = this.props
+
+    if (articlesLoaded && (!article || (!article.text && !article.loading))) {
       loadArticle(id)
     }
   }
@@ -41,22 +40,26 @@ class Article extends PureComponent {
     if (!article) return null
 
     return (
-      <div>
-        <h3>{article.title}</h3>
-        <button
-          onClick={this.handleDelete}
-          className={'test--article-delete__btn'}
-        >
-          {lang === 'ru' ? textsRu.DELETE_ME : textsEn.DELETE_ME}
-        </button>
-        <CSSTransition
-          transitionName="article"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}
-        >
-          {this.body}
-        </CSSTransition>
-      </div>
+      <InterContext.Consumer>
+        {({ deleteArticle }) => (
+          <div>
+            <h3>{article.title}</h3>
+            <button
+              onClick={this.handleDelete}
+              className={'test--article-delete__btn'}
+            >
+              {deleteArticle}
+            </button>
+            <CSSTransition
+              transitionName="article"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={300}
+            >
+              {this.body}
+            </CSSTransition>
+          </div>
+        )}
+      </InterContext.Consumer>
     )
   }
 
@@ -92,7 +95,8 @@ Article.propTypes = {
 
 export default connect(
   (state, ownProps) => ({
-    article: articleSelector(state, ownProps)
+    article: articleSelector(state, ownProps),
+    articlesLoaded: state.articles.loaded
   }),
   {
     dispatchDeleteArticle: deleteArticle,

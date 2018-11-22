@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
+import InterContext from '../../contexts/inter'
 
 export default class UserForm extends Component {
   render() {
     return (
-      <form>
-        Username:
-        <input value={this.props.value} onChange={this.handleUserNameInput} />
-      </form>
+      <InterContext.Consumer>
+        {({ userName }) => (
+          <form>
+            {userName}:
+            <input
+              value={this.props.value}
+              onChange={this.handleUserNameInput}
+            />
+          </form>
+        )}
+      </InterContext.Consumer>
     )
   }
 
