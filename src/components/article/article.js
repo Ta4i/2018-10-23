@@ -19,9 +19,17 @@ class Article extends PureComponent {
   }
 
   componentDidMount() {
-    const { loadArticle, article, id } = this.props
+    this.loadArticleIfRequired()
+  }
 
-    if (!article || (!article.text && !article.loading)) {
+  componentDidUpdate() {
+    this.loadArticleIfRequired()
+  }
+
+  loadArticleIfRequired() {
+    const { articlesLoaded, loadArticle, article, id } = this.props
+
+    if (articlesLoaded && (!article || (!article.text && !article.loading))) {
       loadArticle(id)
     }
   }
@@ -87,7 +95,8 @@ Article.propTypes = {
 
 export default connect(
   (state, ownProps) => ({
-    article: articleSelector(state, ownProps)
+    article: articleSelector(state, ownProps),
+    articlesLoaded: state.articles.loaded
   }),
   {
     dispatchDeleteArticle: deleteArticle,
