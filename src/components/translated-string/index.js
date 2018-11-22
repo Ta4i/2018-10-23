@@ -11,12 +11,12 @@ const TranslatedString = (props) => (
       }
 
       const stringName = props.name
-      const languageFromContext = strings[value.language]
+      const stringsForLanguage = strings[value.language]
 
-      if (!(stringName in languageFromContext))
+      if (!(stringName in stringsForLanguage))
         return 'cannot find string ' + stringName
 
-      return languageFromContext[stringName]
+      return stringsForLanguage[stringName]
     }}
   </LocaleConsumer>
 )
