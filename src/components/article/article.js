@@ -7,16 +7,7 @@ import './style.css'
 import { deleteArticle, loadArticle } from '../../ac'
 import { articleSelector } from '../../selectors'
 import Loader from '../common/loader'
-
-const lang = 'en'
-
-const textsRu = {
-  DELETE_ME: 'Удалить'
-}
-
-const textsEn = {
-  DELETE_ME: 'Delete'
-}
+import i18n from '../i18n'
 
 class Article extends PureComponent {
   state = {
@@ -36,7 +27,7 @@ class Article extends PureComponent {
   }
 
   render() {
-    const { article } = this.props
+    const { article, t } = this.props
 
     if (!article) return null
 
@@ -47,7 +38,7 @@ class Article extends PureComponent {
           onClick={this.handleDelete}
           className={'test--article-delete__btn'}
         >
-          {lang === 'ru' ? textsRu.DELETE_ME : textsEn.DELETE_ME}
+          {t('delete me')}
         </button>
         <CSSTransition
           transitionName="article"
@@ -98,4 +89,4 @@ export default connect(
     dispatchDeleteArticle: deleteArticle,
     loadArticle
   }
-)(Article)
+)(i18n(Article))
