@@ -8,6 +8,7 @@ import CommentsPage from '../routes/comments-page'
 import Menu, { MenuItem } from './menu'
 import { Provider as AuthProvider } from '../contexts/auth'
 import LangProvider from './i18n/lang-provider'
+import Loader from './common/loader'
 
 export default class App extends Component {
   state = {
@@ -22,6 +23,7 @@ export default class App extends Component {
     return (
       <LangProvider language={this.state.language}>
         <AuthProvider value={{ userNameFromContext: this.state.userName }}>
+          <Loader />
           <div>
             <ul>
               <li onClick={this.changeLanguage('en')}>English</li>
